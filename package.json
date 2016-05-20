@@ -1,5 +1,17 @@
 {
-  "name"    : "VaultGUI",
-  "version" : "0.1.0",
-  "main"    : "main.js"
+  "name": "VaultGUI",
+  "version": "0.1.0",
+  "description": "description",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jonsavage/VaultGUI.git"
+  },
+  "author": "Jon Savage",
+  "devDependencies": {
+    "electron-prebuilt": "~1.2.1"
+  }
 }
