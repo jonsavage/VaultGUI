@@ -9,6 +9,11 @@ var vault = require("node-vault")(options);
 $(function() {
   updateStatus();
   $("#getStatus").click(updateStatus);
+  $("#unsealButton").click(function() {
+    var key = $("#key").val();
+    unseal(key);
+    $("#key").val('');
+  });
 });
 
 function updateSealStatus(newStatus) {
@@ -22,4 +27,9 @@ function updateStatus() {
       $("#threshold").val(result.t);
       $("#status").val(result.sealed);
     });
+}
+
+function unseal(unsealKey) {
+  vault.unseal({key:unsealKey})
+    .then(updateStatus);
 }
