@@ -24,6 +24,7 @@ function updateStatus() {
   vault.status()
     .then(function(result) {
       $("#keyCount").val(result.n);
+      $("#progress").val(result.progress);
       $("#threshold").val(result.t);
       $("#status").val(result.sealed);
     });
