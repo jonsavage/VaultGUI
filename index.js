@@ -1,14 +1,16 @@
-var options = {
-  apiVersion: 'v1',
-  endpoint: '<addresss>:<port>',
-  token: '1234' // client token; can be fetched after valid initialization of the server
-};
-
-var vault = require("node-vault")(options);
+var options;
+var vault;
 
 $(function() {
-  updateStatus();
+  $("#connectButton").click(function() {
+    var serverAddress = $("#serverAddress").val();
+    initVault(serverAddress);
+
+    updateStatus();
+  });
+
   $("#getStatus").click(updateStatus);
+
   $("#unsealButton").click(function() {
     var key = $("#key").val();
     unseal(key);
@@ -33,4 +35,13 @@ function updateStatus() {
 function unseal(unsealKey) {
   vault.unseal({key:unsealKey})
     .then(updateStatus);
+}
+
+function initVault(serverAddress) {
+  options = {
+    apiVersion: 'v1',
+    endpoint: serverAddress,
+    token: '1234' // client token; can be fetched after valid initialization of the server
+  };
+  vault = require("node-vault")(options);
 }
