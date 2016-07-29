@@ -20,6 +20,8 @@ $(function() {
   $("#setTokenButton").click(function() {
     vault.token =  $("#token").val();
   })
+
+  $("#getAuthsMethodsButton").click(getMountedAuthBackends);
 });
 
 function updateSealStatus(newStatus) {
@@ -47,4 +49,12 @@ function initVault(serverAddress) {
     endpoint: serverAddress
   };
   vault = require("node-vault")(options);
+}
+
+function getMountedAuthBackends() {
+  vault.auths()
+    .then(function(result) {
+        $("#authMethods").text(Object.keys(result));
+    })
+    .catch((err) => console.error(err));
 }
