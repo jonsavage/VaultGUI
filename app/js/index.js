@@ -16,6 +16,10 @@ $(function() {
     unseal(key);
     $("#key").val('');
   });
+
+  $("#setTokenButton").click(function() {
+    vault.token =  $("#token").val();
+  })
 });
 
 function updateSealStatus(newStatus) {
@@ -40,8 +44,7 @@ function unseal(unsealKey) {
 function initVault(serverAddress) {
   options = {
     apiVersion: 'v1',
-    endpoint: serverAddress,
-    token: '1234' // client token; can be fetched after valid initialization of the server
+    endpoint: serverAddress
   };
   vault = require("node-vault")(options);
 }
