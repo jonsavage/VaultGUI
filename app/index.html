@@ -10,9 +10,28 @@
 
   </head>
   <body>
-    <label for="serverAddress">Vault Server and Port #:</label>
-    <input class="form-control" id="serverAddress" placeholder="https://serveraddress.com:8200">
-    <button class="btn btn-primary">connect</button><br>
+
+    <div class="container">
+      <div class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" href="#serverConnectionCollapse">Server Connection</a>
+            </h4>
+          </div>
+          <div id="serverConnectionCollapse" class="panel-collapse collapse">
+            <div class="panel-body">
+              <label for="serverAddress">Vault Server and Port #:</label>
+              <input class="form-control" id="serverAddress" placeholder="https://serveraddress.com:8200">
+            </div>
+            <div class="panel-footer">
+              <button class="btn btn-primary" id="connectButton">connect</button><br>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+
     <label for="token">Token:</label>
     <input type="text" id="token" value="">
     <button class="btn btn-primary" id="setTokenButton">set token</button>
@@ -39,9 +58,8 @@
     <button class="btn btn-primary" id="getAuthsMethodsButton">get auth methods</button><br>
     <label for="authMethods">Mounted Auth Methods:</label>
     <p id="authMethods"></p>
-
-
   </body>
   <script>window.$ = window.jQuery = require('../node_modules/jquery/dist/jquery.min.js');</script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="js/index.js"></script>
 </html>
