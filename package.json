@@ -4,7 +4,7 @@
   "description": "description",
   "main": "app.js",
   "scripts": {
-    "start": "electron main.js"
+    "start": "electron app.js"
   },
   "repository": {
     "type": "git",
