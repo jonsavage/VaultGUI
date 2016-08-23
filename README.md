@@ -1,4 +1,4 @@
-# VaultGUI
+# VaultGUI [![Build Status](https://travis-ci.org/jonsavage/VaultGUI.svg?branch=master)](https://travis-ci.org/jonsavage/VaultGUI)
 
 A cross-platform desktop app for interacting with a Hashicorp Vault server.
 This project is in the very early stages. I'm currently proof of concept-ing each of Vault's functions.
