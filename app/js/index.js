@@ -19,7 +19,7 @@ $(function() {
 
   $("#setTokenButton").click(function() {
     vault.token =  $("#token").val();
-  })
+  });
 
   $("#getAuthsMethodsButton").click(getMountedAuthBackends);
 });
