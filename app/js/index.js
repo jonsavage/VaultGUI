@@ -31,10 +31,10 @@ function updateSealStatus(newStatus) {
 function updateStatus() {
   vault.status()
     .then(function(result) {
-      $("#keyCount").val(result.n);
-      $("#progress").val(result.progress);
-      $("#threshold").val(result.t);
-      $("#status").val(result.sealed);
+      document.getElementById("keyCount").innerHTML = result.n;
+      document.getElementById("progress").innerHTML = result.progress;
+      document.getElementById("threshold").innerHTML = result.t;
+      document.getElementById("status").innerHTML = result.sealed;
     });
 }
 
