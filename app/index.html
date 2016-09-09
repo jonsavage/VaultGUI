@@ -30,28 +30,48 @@
           </div>
         </div>
       </div>
-  </div>
+    </div>
+
+    <div class="container">
+      <div class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" href="#sealCollapse">Unseal</a>
+            </h4>
+          </div>
+          <div id="sealCollapse" class="panel-collapse collapse">
+            <div class="panel-body">
+              <label for="keyCount">Key Count:</label>
+              <label id="keyCount">?</label> <br>
+
+              <label for="progress">Progress:</label>
+              <label id="progress">?</label> <br>
+
+              <label for="threshold">Threshold:</label>
+              <label id="threshold">?</label> <br>
+
+              <label for="status">Is Sealed?:</label>
+              <label id="status">?</label> <br>
+
+              <label for="key">Key:</label>
+              <input type="text" id="key" value="">
+            </div>
+            <div class="panel-footer">
+              <button class="btn btn-primary" id="unsealButton">unseal</button><br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <label for="token">Token:</label>
-    <input type="text" id="token" value="">
+    <input type="text" id="token">
     <button class="btn btn-primary" id="setTokenButton">set token</button>
 
     <br><br>
 
-    <label for="keyCount">Key Count:</label>
-    <input type="text" id="keyCount" value=""> <br>
-    <label for="progress">Progress:</label>
-    <input type="text" id="progress" value=""><br>
-    <label for="threshold">Threshold:</label>
-    <input type="text" id="threshold" value=""><br>
-    <label for="status">Is Sealed?:</label>
-    <input type="text" id="status" value="">
-
     <button class="btn btn-primary" id="getStatus">get status</button><br>
-
-    <label for="key">Key:</label>
-    <input type="text" id="key" value="">
-    <button class="btn btn-primary" id="unsealButton">unseal</button><br>
 
     <br><br>
 
