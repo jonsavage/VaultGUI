@@ -14,6 +14,8 @@ $(function() {
   $("#setTokenButton").click(authenticate);
 
   $("#getAuthsMethodsButton").click(getMountedAuthBackends);
+
+  $("#sealButton").click(seal);
 });
 
 function authenticate() {
@@ -49,6 +51,13 @@ function updateStatus() {
 
 function isAuthenticated() {
   return vault.token !== undefined
+}
+
+function seal() {
+  vault.seal()
+  .then(function() {
+    updateStatus();
+  });
 }
 
 function unseal() {
