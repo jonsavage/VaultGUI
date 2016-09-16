@@ -34,6 +34,7 @@ function updateStatus() {
       document.getElementById("progress").innerHTML = result.progress;
       document.getElementById("threshold").innerHTML = result.t;
       document.getElementById("status").innerHTML = result.sealed;
+      document.getElementById("isConnected").innerHTML = true;
     });
 }
 
