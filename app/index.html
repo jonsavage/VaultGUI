@@ -46,6 +46,27 @@
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">
+              <a data-toggle="collapse" href="#authenticationCollapse">Authenticate</a>
+            </h4>
+          </div>
+          <div id="authenticationCollapse" class="panel-collapse collapse">
+            <div class="panel-body">
+              <label for="token">Token:</label>
+              <input type="text" id="token">
+            </div>
+            <div class="panel-footer">
+              <button class="btn btn-primary" id="setTokenButton">set token</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
               <a data-toggle="collapse" href="#sealCollapse">Unseal</a>
             </h4>
           </div>
@@ -73,10 +94,6 @@
         </div>
       </div>
     </div>
-
-    <label for="token">Token:</label>
-    <input type="text" id="token">
-    <button class="btn btn-primary" id="setTokenButton">set token</button>
 
     <br><br>
 
