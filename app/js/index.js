@@ -11,12 +11,20 @@ $(function() {
 
   $("#unsealButton").click(unseal);
 
-  $("#setTokenButton").click(function() {
-    vault.token =  $("#token").val();
-  });
+  $("#setTokenButton").click(authenticate);
 
   $("#getAuthsMethodsButton").click(getMountedAuthBackends);
 });
+
+function authenticate() {
+  var token =  $("#token").val();
+  setAuthenticationToken(token);
+  updateStatus();
+}
+
+function setAuthenticationToken(token) {
+  vault.token = token;
+}
 
 function connectToServer() {
   var serverAddress = $("#serverAddress").val();
@@ -35,7 +43,12 @@ function updateStatus() {
       document.getElementById("threshold").innerHTML = result.t;
       document.getElementById("status").innerHTML = result.sealed;
       document.getElementById("isConnected").innerHTML = true;
+      document.getElementById("isAuthenticated").innerHTML = isAuthenticated();
     });
+}
+
+function isAuthenticated() {
+  return vault.token !== undefined
 }
 
 function unseal() {
