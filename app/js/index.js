@@ -11,14 +11,14 @@ $(function() {
 
   $("#unsealButton").click(unseal);
 
-  $("#setTokenButton").click(authenticate);
+  $("#setTokenButton").click(setAuthenticationTokenHandler);
 
   $("#getAuthsMethodsButton").click(getMountedAuthBackends);
 
   $("#sealButton").click(seal);
 });
 
-function authenticate() {
+function setAuthenticationTokenHandler() {
   var token =  $("#token").val();
   setAuthenticationToken(token);
   updateStatus();
