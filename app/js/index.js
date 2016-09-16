@@ -11,11 +11,7 @@ $(function() {
 
   $("#getStatus").click(updateStatus);
 
-  $("#unsealButton").click(function() {
-    var key = $("#key").val();
-    unseal(key);
-    $("#key").val('');
-  });
+  $("#unsealButton").click(unseal);
 
   $("#setTokenButton").click(function() {
     vault.token =  $("#token").val();
@@ -38,7 +34,13 @@ function updateStatus() {
     });
 }
 
-function unseal(unsealKey) {
+function unseal() {
+  var key = $("#key").val();
+  unsealVault(key);
+  $("#key").val('');
+}
+
+function unsealVault(unsealKey) {
   vault.unseal({key:unsealKey})
     .then(updateStatus);
 }
