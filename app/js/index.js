@@ -3,9 +3,7 @@ var vault;
 
 $(function() {
   $("#connectButton").click(function() {
-    var serverAddress = $("#serverAddress").val();
-    initVault(serverAddress);
-
+    connectToServer();
     updateStatus();
   });
 
@@ -19,6 +17,11 @@ $(function() {
 
   $("#getAuthsMethodsButton").click(getMountedAuthBackends);
 });
+
+function connectToServer() {
+  var serverAddress = $("#serverAddress").val();
+  initVault(serverAddress);
+}
 
 function updateSealStatus(newStatus) {
   $("#status").val(newStatus.sealed);
