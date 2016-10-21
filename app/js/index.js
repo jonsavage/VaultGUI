@@ -17,7 +17,7 @@ $(function() {
 
   $("#sealButton").click(seal);
 
-  $("#userpassAuthenticateButton").click(userpassAuthenticate);
+  $("#userpassButton").click(userpassAuthenticate);
 });
 
 function setAuthenticationTokenHandler() {
