@@ -16,6 +16,8 @@ $(function() {
   $("#getAuthsMethodsButton").click(getMountedAuthBackends);
 
   $("#sealButton").click(seal);
+
+  $("#userpassAuthenticateButton").click(userpassAuthenticate);
 });
 
 function setAuthenticationTokenHandler() {
@@ -85,4 +87,13 @@ function getMountedAuthBackends() {
         $("#authMethods").text(Object.keys(result));
     })
     .catch((err) => console.error(err));
+}
+
+function userpassAuthenticate() {
+  var username = $("#username").val();
+  var password = $("#password").val();
+
+  vault.userpassLogin({username, password})
+    .then((result) => setAuthenticationToken(result.auth.client_token))
+    .then(updateStatus);
 }
