@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/common.css">
 
-
   </head>
   <body>
     <ul>
@@ -54,35 +53,54 @@
           </div>
           <div id="authenticationCollapse" class="panel-collapse collapse">
             <div class="panel-body">
-              <label for="username">Username:</label>
-              <input class="form-control" id="username">
-              <label for="password">Password:</label>
-              <input class="form-control" id="password">
-            </div>
-            <div class="panel-footer">
-              <button class="btn btn-primary" id="userpassAuthenticateButton">authenticate</button><br>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="container">
-      <div class="panel-group">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a data-toggle="collapse" href="#authenticationTokenCollapse">Set Authentication Token</a>
-            </h4>
-          </div>
-          <div id="authenticationTokenCollapse" class="panel-collapse collapse">
-            <div class="panel-body">
-              <label for="token">Token:</label>
-              <input type="text" id="token">
+              <!-- Root Token Authentication -->
+              <div class="container">
+                <div class="panel-group">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#authenticationTokenCollapse">Authentication Token</a>
+                      </h4>
+                    </div>
+                    <div id="authenticationTokenCollapse" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        <label for="token">Token:</label>
+                        <input type="text" id="token">
+                      </div>
+                      <div class="panel-footer">
+                        <button class="btn btn-primary" id="setTokenButton">set token</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Userpass Authentication -->
+              <div class="container">
+                <div class="panel-group">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#userpassCollapse">Authentication Token</a>
+                      </h4>
+                    </div>
+                    <div id="userpassCollapse" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        <label for="username">Username:</label>
+                        <input class="form-control" id="username">
+                        <label for="password">Password:</label>
+                        <input class="form-control" id="password">
+                      </div>
+                      <div class="panel-footer">
+                        <button class="btn btn-primary" id="setTokenButton">set token</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="panel-footer">
-              <button class="btn btn-primary" id="setTokenButton">set token</button>
-            </div>
+
           </div>
         </div>
       </div>
