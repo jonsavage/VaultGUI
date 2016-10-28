@@ -18,6 +18,8 @@ $(function() {
   $("#sealButton").click(seal);
 
   $("#userpassButton").click(userpassAuthenticate);
+
+  $("#githubButton").click(githubAuthenticate);
 });
 
 function setAuthenticationTokenHandler() {
@@ -94,6 +96,14 @@ function userpassAuthenticate() {
   var password = $("#password").val();
 
   vault.userpassLogin({username, password})
+    .then((result) => setAuthenticationToken(result.auth.client_token))
+    .then(updateStatus);
+}
+
+function githubAuthenticate() {
+  var token = $("#githubToken").val();
+
+  vault.githubLogin({ token })
     .then((result) => setAuthenticationToken(result.auth.client_token))
     .then(updateStatus);
 }
