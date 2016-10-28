@@ -12,9 +12,16 @@ All of the node_modules are checked in to VC making things simpler.
 
 Feel free to contribute or submit issues as needed.
 
-General Plan:
-1. Continue to proof of concept wrap each node-vault method. 
+## General Plan:
+1. Continue to proof of concept wrap each node-vault method.
 2. Organize UI in some sort of intuitive fashion.
-3. Set up a directory like tree UI for displaying/managing secrets. 
+3.  Set up a directory like tree UI for displaying/managing secrets. 
 
+## Features Completed
+1. Server Connection
+2. Authentication Methods
+ * Root Token
+ * userpass (username and password)
+ * GitHub (token)
+3. Seal/Unseal
 
