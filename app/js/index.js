@@ -10,6 +10,7 @@ $(function() {
   $("#unsealButton").click(unseal);
   $("#setTokenButton").click(setAuthenticationTokenHandler);
   $("#getAuthsMethodsButton").click(getMountedAuthBackends);
+  $("#getMountsButton").click(getMountedSecretBackends);
   $("#sealButton").click(seal);
   $("#userpassButton").click(userpassAuthenticate);
   $("#githubButton").click(githubAuthenticate);
@@ -83,6 +84,16 @@ function getMountedAuthBackends() {
         $("#authMethods").text(Object.keys(result));
     })
     .catch((err) => console.error(err));
+}
+
+function getMountedSecretBackends() {
+  vault.mounts()
+    .then((result) => successfulMountsQueryHandler(result))
+    .catch((err) => console.error(err));
+}
+
+function successfulMountsQueryHandler(mountsDictionary) {
+  $("#secretBackends").val(JSON.stringify(mountsDictionary, null, 4));
 }
 
 function userpassAuthenticate() {
