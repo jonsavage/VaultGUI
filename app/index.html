@@ -128,6 +128,7 @@
       </div>
     </div>
 
+    <!-- Unseal -->
     <div class="container">
       <div class="panel-group">
         <div class="panel panel-default">
@@ -161,6 +162,7 @@
       </div>
     </div>
 
+    <!-- Read -->
     <div class="container">
       <div class="panel-group">
         <div class="panel panel-default">
@@ -178,6 +180,45 @@
             <div class="panel-footer">
               <button class="btn btn-primary" id="readSecretsButton">Read Secrets</button><br>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mounts -->
+    <div class="container">
+      <div class="panel-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" href="#backendsCollapse">Mounts</a>
+            </h4>
+          </div>
+          <div id="backendsCollapse" class="panel-collapse collapse">
+            <div class="panel-body">
+
+            <!-- Secret Mounts -->
+            <div class="container">
+              <div class="panel-group">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" href="#secretMountsCollapse">Secret Backends</a>
+                    </h4>
+                  </div>
+                  <div id="secretMountsCollapse" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <p>Mounted Secret Backends:</p>
+                      <textarea id="secretBackends"></textarea>
+                    </div>
+                    <div class="panel-footer">
+                      <button class="btn btn-primary" id="getMountsButton">Get</button><br>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
