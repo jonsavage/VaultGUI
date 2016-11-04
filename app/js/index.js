@@ -6,20 +6,14 @@ $(function() {
     connectToServer();
     updateStatus();
   });
-
   $("#getStatus").click(updateStatus);
-
   $("#unsealButton").click(unseal);
-
   $("#setTokenButton").click(setAuthenticationTokenHandler);
-
   $("#getAuthsMethodsButton").click(getMountedAuthBackends);
-
   $("#sealButton").click(seal);
-
   $("#userpassButton").click(userpassAuthenticate);
-
   $("#githubButton").click(githubAuthenticate);
+  $("#readSecretsButton").click(readSecrets);
 });
 
 function setAuthenticationTokenHandler() {
@@ -106,4 +100,23 @@ function githubAuthenticate() {
   vault.githubLogin({ token })
     .then((result) => setAuthenticationToken(result.auth.client_token))
     .then(updateStatus);
+}
+
+function readSecrets() {
+  vault.read($("#mountPoint").val())
+    .then((result) => successfulSecretQueryHandler(result.data))
+    .catch((result) => failedSecretQueryHandler(result));
+}
+
+function successfulSecretQueryHandler(dictionary) {
+  $("#secrets").text(formatSecrets(dictionary));
+}
+
+function failedSecretQueryHandler(result) {
+  $("#secrets").text(result);
+}
+
+function formatSecrets(dictionary) {
+  var output = JSON.stringify(dictionary, null, 4);
+  return output;
 }
