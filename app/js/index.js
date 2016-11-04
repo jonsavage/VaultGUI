@@ -119,15 +119,15 @@ function readSecrets() {
     .catch((result) => failedSecretQueryHandler(result));
 }
 
-function successfulSecretQueryHandler(dictionary) {
-  $("#secrets").text(formatSecrets(dictionary));
+function successfulSecretQueryHandler(secrets) {
+  $("#secrets").val(formatSecrets(secrets));
 }
 
 function failedSecretQueryHandler(result) {
   $("#secrets").text(result);
 }
 
-function formatSecrets(dictionary) {
-  var output = JSON.stringify(dictionary, null, 4);
+function formatSecrets(secrets) {
+  var output = JSON.stringify(secrets, null, 4);
   return output;
 }
