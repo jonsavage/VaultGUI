@@ -9,7 +9,7 @@ $(function() {
   $("#getStatus").click(updateStatus);
   $("#unsealButton").click(unseal);
   $("#setTokenButton").click(setAuthenticationTokenHandler);
-  $("#getAuthsMethodsButton").click(getMountedAuthBackends);
+  $("#getAuthMountsButton").click(getMountedAuthBackends);
   $("#getMountsButton").click(getMountedSecretBackends);
   $("#sealButton").click(seal);
   $("#userpassButton").click(userpassAuthenticate);
@@ -80,10 +80,12 @@ function initVault(serverAddress) {
 
 function getMountedAuthBackends() {
   vault.auths()
-    .then(function(result) {
-        $("#authMethods").text(Object.keys(result));
-    })
+    .then((result) => successfulAuthMountsQueryHandler(result))
     .catch((err) => console.error(err));
+}
+
+function successfulAuthMountsQueryHandler(mountsDictionary) {
+  $("#authBackends").val(JSON.stringify(mountsDictionary, null, 4));
 }
 
 function getMountedSecretBackends() {
