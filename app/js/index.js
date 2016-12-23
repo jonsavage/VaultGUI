@@ -12,7 +12,6 @@ app.controller('vaultController', function($scope) {
     $("#setTokenButton").click(setAuthenticationTokenHandler);
     $("#getAuthMountsButton").click(getMountedAuthBackends);
     $("#getMountsButton").click(getMountedSecretBackends);
-    $("#sealButton").click(seal);
     $("#userpassButton").click(userpassAuthenticate);
     $("#githubButton").click(githubAuthenticate);
     $("#readSecretsButton").click(readSecrets);
@@ -27,6 +26,13 @@ app.controller('vaultController', function($scope) {
     var key = $("#key").val();
     unsealVault(key);
     $("#key").val('');
+  }
+
+  $scope.seal = function() {
+    vault.seal()
+    .then(function() {
+      updateStatus();
+    });
   }
 
   function setAuthenticationTokenHandler() {
@@ -59,13 +65,6 @@ app.controller('vaultController', function($scope) {
 
   function isAuthenticated() {
     return vault.token !== undefined;
-  }
-
-  function seal() {
-    vault.seal()
-    .then(function() {
-      updateStatus();
-    });
   }
 
   function unsealVault(unsealKey) {
