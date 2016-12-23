@@ -10,7 +10,6 @@ app.controller('vaultController', function($scope) {
   $(function() {
     $("#getStatus").click(updateStatus);
     $("#getAuthMountsButton").click(getMountedAuthBackends);
-    $("#getMountsButton").click(getMountedSecretBackends);
   });
 
   $scope.connect = function() {
@@ -60,6 +59,12 @@ app.controller('vaultController', function($scope) {
       .catch((result) => failedSecretQueryHandler(result));
   }
 
+  $scope.getMountedSecretBackends = function() {
+    vault.mounts()
+      .then((result) => successfulMountsQueryHandler(result))
+      .catch((err) => console.error(err));
+  }
+
   function setAuthenticationToken(token) {
     vault.token = token;
   }
@@ -107,12 +112,6 @@ app.controller('vaultController', function($scope) {
 
   function successfulAuthMountsQueryHandler(mountsDictionary) {
     $("#authBackends").val(JSON.stringify(mountsDictionary, null, 4));
-  }
-
-  function getMountedSecretBackends() {
-    vault.mounts()
-      .then((result) => successfulMountsQueryHandler(result))
-      .catch((err) => console.error(err));
   }
 
   function successfulMountsQueryHandler(mountsDictionary) {
