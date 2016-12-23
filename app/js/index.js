@@ -7,10 +7,6 @@ app.controller('vaultController', function($scope) {
   $scope.authenticationStatus;
   $scope.sealStatus;
 
-  $(function() {
-    $("#getStatus").click(updateStatus);
-  });
-
   $scope.connect = function() {
     connectToServer();
     updateStatus();
