@@ -10,112 +10,233 @@
 
   </head>
   <body>
-    <ul>
-      <li>
-        <label for="isConnected">Is Connected?:</label>
-        <label id="isConnected"></label>
-        <label for="isAuthenticated">Is Authenticated?:</label>
-        <label id="isAuthenticated"></label>
-        <label for="status">Is Sealed?:</label>
-        <label id="status"></label>
-        <button class="btn btn-primary" id="sealButton">Seal</button><br>
-      </li>
-    </ul>
+    <div ng-app="vaultGui" ng-controller="vaultController">
+      <ul>
+        <li>
+          <label for="isConnected">Is Connected:</label>
+          <label id="isConnected"></label>
+          <label for="isAuthenticated">Is Authenticated:</label>
+          <label id="isAuthenticated"></label>
+          <label for="status">Is Sealed?:</label>
+          <label id="status"></label>
+          <button class="btn btn-primary" id="sealButton">Seal</button><br>
+        </li>
+      </ul>
 
-    <div class="container">
-      <div class="panel-group">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a data-toggle="collapse" href="#serverConnectionCollapse">Server Connection</a>
-            </h4>
-          </div>
-          <div id="serverConnectionCollapse" class="panel-collapse collapse">
-            <div class="panel-body">
-              <label for="serverAddress">Vault Server and Port #:</label>
-              <input class="form-control" id="serverAddress" placeholder="https://serveraddress.com:8200">
+      <div class="container">
+        <div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" href="#serverConnectionCollapse">Server Connection</a>
+              </h4>
             </div>
-            <div class="panel-footer">
-              <button class="btn btn-primary" id="connectButton">connect</button><br>
+            <div id="serverConnectionCollapse" class="panel-collapse collapse">
+              <div class="panel-body">
+                <label for="serverAddress">Vault Server and Port #:</label>
+                <input class="form-control" id="serverAddress" placeholder="https://serveraddress.com:8200">
+              </div>
+              <div class="panel-footer">
+                <button class="btn btn-primary" id="connectButton">connect</button><br>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="container">
-      <div class="panel-group">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a data-toggle="collapse" href="#authenticationCollapse">Authenticate</a>
-            </h4>
+      <div class="container">
+        <div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" href="#authenticationCollapse">Authenticate</a>
+              </h4>
+            </div>
+            <div id="authenticationCollapse" class="panel-collapse collapse">
+              <div class="panel-body">
+
+                <!-- Root Token Authentication -->
+                <div class="container">
+                  <div class="panel-group">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a data-toggle="collapse" href="#rootTokenCollapse">Root Token</a>
+                        </h4>
+                      </div>
+                      <div id="rootTokenCollapse" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <label for="token">Token:</label>
+                          <input type="text" id="token">
+                        </div>
+                        <div class="panel-footer">
+                          <button class="btn btn-primary" id="setTokenButton">set token</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Userpass Authentication -->
+                <div class="container">
+                  <div class="panel-group">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a data-toggle="collapse" href="#userpassCollapse">Userpass</a>
+                        </h4>
+                      </div>
+                      <div id="userpassCollapse" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <label for="username">Username:</label>
+                          <input class="form-control" id="username">
+                          <label for="password">Password:</label>
+                          <input class="form-control" id="password">
+                        </div>
+                        <div class="panel-footer">
+                          <button class="btn btn-primary" id="userpassButton">set token</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- GitHub Authentication -->
+                <div class="container">
+                  <div class="panel-group">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a data-toggle="collapse" href="#githubCollapse">GitHub</a>
+                        </h4>
+                      </div>
+                      <div id="githubCollapse" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <label for="githubToken">GitHub Token:</label>
+                          <input type="text" id="githubToken">
+                        </div>
+                        <div class="panel-footer">
+                          <button class="btn btn-primary" id="githubButton">Authenticate</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
           </div>
-          <div id="authenticationCollapse" class="panel-collapse collapse">
-            <div class="panel-body">
+        </div>
+      </div>
 
-              <!-- Root Token Authentication -->
+      <!-- Unseal -->
+      <div class="container">
+        <div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" href="#unsealCollapse">Unseal</a>
+              </h4>
+            </div>
+            <div id="unsealCollapse" class="panel-collapse collapse">
+              <div class="panel-body">
+                <label for="keyCount">Key Count:</label>
+                <label id="keyCount">?</label> <br>
+
+                <label for="progress">Progress:</label>
+                <label id="progress">?</label> <br>
+
+                <label for="threshold">Threshold:</label>
+                <label id="threshold">?</label> <br>
+
+                <label for="status">Is Sealed?:</label>
+                <label id="status">?</label> <br>
+
+                <label for="key">Key:</label>
+                <input type="text" id="key" value="">
+              </div>
+              <div class="panel-footer">
+                <button class="btn btn-primary" id="unsealButton">unseal</button><br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Read -->
+      <div class="container">
+        <div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" href="#readCollapse">Read</a>
+              </h4>
+            </div>
+            <div id="readCollapse" class="panel-collapse collapse">
+              <div class="panel-body">
+                  <label for="mountPoint">Mount Point:</label>
+                  <input type="text" id="mountPoint">
+                  <br>
+                  <textarea id="secrets"></textarea>
+              </div>
+              <div class="panel-footer">
+                <button class="btn btn-primary" id="readSecretsButton">Read Secrets</button><br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mounts -->
+      <div class="container">
+        <div class="panel-group">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" href="#backendsCollapse">Mounts</a>
+              </h4>
+            </div>
+            <div id="backendsCollapse" class="panel-collapse collapse">
+              <div class="panel-body">
+
+              <!-- Secret Mounts -->
               <div class="container">
                 <div class="panel-group">
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       <h4 class="panel-title">
-                        <a data-toggle="collapse" href="#rootTokenCollapse">Root Token</a>
+                        <a data-toggle="collapse" href="#secretMountsCollapse">Secret Backends</a>
                       </h4>
                     </div>
-                    <div id="rootTokenCollapse" class="panel-collapse collapse">
+                    <div id="secretMountsCollapse" class="panel-collapse collapse">
                       <div class="panel-body">
-                        <label for="token">Token:</label>
-                        <input type="text" id="token">
+                        <p>Mounted Secret Backends:</p>
+                        <textarea id="secretBackends"></textarea>
                       </div>
                       <div class="panel-footer">
-                        <button class="btn btn-primary" id="setTokenButton">set token</button>
+                        <button class="btn btn-primary" id="getMountsButton">Get</button><br>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <!-- Userpass Authentication -->
+              <!-- Auth Mounts -->
               <div class="container">
                 <div class="panel-group">
                   <div class="panel panel-default">
                     <div class="panel-heading">
                       <h4 class="panel-title">
-                        <a data-toggle="collapse" href="#userpassCollapse">Userpass</a>
+                        <a data-toggle="collapse" href="#authMountsCollapse">Auth Backends</a>
                       </h4>
                     </div>
-                    <div id="userpassCollapse" class="panel-collapse collapse">
+                    <div id="authMountsCollapse" class="panel-collapse collapse">
                       <div class="panel-body">
-                        <label for="username">Username:</label>
-                        <input class="form-control" id="username">
-                        <label for="password">Password:</label>
-                        <input class="form-control" id="password">
+                        <p>Mounted Auth Backends:</p>
+                        <textarea id="authBackends"></textarea>
                       </div>
                       <div class="panel-footer">
-                        <button class="btn btn-primary" id="userpassButton">set token</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- GitHub Authentication -->
-              <div class="container">
-                <div class="panel-group">
-                  <div class="panel panel-default">
-                    <div class="panel-heading">
-                      <h4 class="panel-title">
-                        <a data-toggle="collapse" href="#githubCollapse">GitHub</a>
-                      </h4>
-                    </div>
-                    <div id="githubCollapse" class="panel-collapse collapse">
-                      <div class="panel-body">
-                        <label for="githubToken">GitHub Token:</label>
-                        <input type="text" id="githubToken">
-                      </div>
-                      <div class="panel-footer">
-                        <button class="btn btn-primary" id="githubButton">Authenticate</button>
+                        <button class="btn btn-primary" id="getAuthMountsButton">Get</button><br>
                       </div>
                     </div>
                   </div>
@@ -126,131 +247,11 @@
           </div>
         </div>
       </div>
+
+      <br><br>
+
+      <button class="btn btn-primary" id="getStatus">get status</button><br>
     </div>
-
-    <!-- Unseal -->
-    <div class="container">
-      <div class="panel-group">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a data-toggle="collapse" href="#unsealCollapse">Unseal</a>
-            </h4>
-          </div>
-          <div id="unsealCollapse" class="panel-collapse collapse">
-            <div class="panel-body">
-              <label for="keyCount">Key Count:</label>
-              <label id="keyCount">?</label> <br>
-
-              <label for="progress">Progress:</label>
-              <label id="progress">?</label> <br>
-
-              <label for="threshold">Threshold:</label>
-              <label id="threshold">?</label> <br>
-
-              <label for="status">Is Sealed?:</label>
-              <label id="status">?</label> <br>
-
-              <label for="key">Key:</label>
-              <input type="text" id="key" value="">
-            </div>
-            <div class="panel-footer">
-              <button class="btn btn-primary" id="unsealButton">unseal</button><br>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Read -->
-    <div class="container">
-      <div class="panel-group">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a data-toggle="collapse" href="#readCollapse">Read</a>
-            </h4>
-          </div>
-          <div id="readCollapse" class="panel-collapse collapse">
-            <div class="panel-body">
-                <label for="mountPoint">Mount Point:</label>
-                <input type="text" id="mountPoint">
-                <br>
-                <textarea id="secrets"></textarea>
-            </div>
-            <div class="panel-footer">
-              <button class="btn btn-primary" id="readSecretsButton">Read Secrets</button><br>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mounts -->
-    <div class="container">
-      <div class="panel-group">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <a data-toggle="collapse" href="#backendsCollapse">Mounts</a>
-            </h4>
-          </div>
-          <div id="backendsCollapse" class="panel-collapse collapse">
-            <div class="panel-body">
-
-            <!-- Secret Mounts -->
-            <div class="container">
-              <div class="panel-group">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h4 class="panel-title">
-                      <a data-toggle="collapse" href="#secretMountsCollapse">Secret Backends</a>
-                    </h4>
-                  </div>
-                  <div id="secretMountsCollapse" class="panel-collapse collapse">
-                    <div class="panel-body">
-                      <p>Mounted Secret Backends:</p>
-                      <textarea id="secretBackends"></textarea>
-                    </div>
-                    <div class="panel-footer">
-                      <button class="btn btn-primary" id="getMountsButton">Get</button><br>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Auth Mounts -->
-            <div class="container">
-              <div class="panel-group">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h4 class="panel-title">
-                      <a data-toggle="collapse" href="#authMountsCollapse">Auth Backends</a>
-                    </h4>
-                  </div>
-                  <div id="authMountsCollapse" class="panel-collapse collapse">
-                    <div class="panel-body">
-                      <p>Mounted Auth Backends:</p>
-                      <textarea id="authBackends"></textarea>
-                    </div>
-                    <div class="panel-footer">
-                      <button class="btn btn-primary" id="getAuthMountsButton">Get</button><br>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <br><br>
-
-    <button class="btn btn-primary" id="getStatus">get status</button><br>
-
   </body>
   <script>window.$ = window.jQuery = require('../node_modules/jquery/dist/jquery.min.js');</script>
   <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>

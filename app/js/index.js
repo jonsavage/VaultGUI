@@ -1,135 +1,138 @@
 var options;
 var vault;
 
-$(function() {
-  $("#connectButton").click(function() {
-    connectToServer();
-    updateStatus();
-  });
-  $("#getStatus").click(updateStatus);
-  $("#unsealButton").click(unseal);
-  $("#setTokenButton").click(setAuthenticationTokenHandler);
-  $("#getAuthMountsButton").click(getMountedAuthBackends);
-  $("#getMountsButton").click(getMountedSecretBackends);
-  $("#sealButton").click(seal);
-  $("#userpassButton").click(userpassAuthenticate);
-  $("#githubButton").click(githubAuthenticate);
-  $("#readSecretsButton").click(readSecrets);
-});
-
-function setAuthenticationTokenHandler() {
-  var token =  $("#token").val();
-  setAuthenticationToken(token);
-  updateStatus();
-}
-
-function setAuthenticationToken(token) {
-  vault.token = token;
-}
-
-function connectToServer() {
-  var serverAddress = $("#serverAddress").val();
-  initVault(serverAddress);
-}
-
-function updateSealStatus(newStatus) {
-  $("#status").val(newStatus.sealed);
-}
-
-function updateStatus() {
-  vault.status()
-    .then(function(result) {
-      document.getElementById("keyCount").innerHTML = result.n;
-      document.getElementById("progress").innerHTML = result.progress;
-      document.getElementById("threshold").innerHTML = result.t;
-      document.getElementById("status").innerHTML = result.sealed;
-      document.getElementById("isConnected").innerHTML = true;
-      document.getElementById("isAuthenticated").innerHTML = isAuthenticated();
+var app = angular.module('vaultGui', []);
+app.controller('vaultController', function($scope) {
+  $(function() {
+    $("#connectButton").click(function() {
+      connectToServer();
+      updateStatus();
     });
-}
-
-function isAuthenticated() {
-  return vault.token !== undefined
-}
-
-function seal() {
-  vault.seal()
-  .then(function() {
-    updateStatus();
+    $("#getStatus").click(updateStatus);
+    $("#unsealButton").click(unseal);
+    $("#setTokenButton").click(setAuthenticationTokenHandler);
+    $("#getAuthMountsButton").click(getMountedAuthBackends);
+    $("#getMountsButton").click(getMountedSecretBackends);
+    $("#sealButton").click(seal);
+    $("#userpassButton").click(userpassAuthenticate);
+    $("#githubButton").click(githubAuthenticate);
+    $("#readSecretsButton").click(readSecrets);
   });
-}
 
-function unseal() {
-  var key = $("#key").val();
-  unsealVault(key);
-  $("#key").val('');
-}
+  function setAuthenticationTokenHandler() {
+    var token =  $("#token").val();
+    setAuthenticationToken(token);
+    updateStatus();
+  }
 
-function unsealVault(unsealKey) {
-  vault.unseal({key:unsealKey})
-    .then(updateStatus);
-}
+  function setAuthenticationToken(token) {
+    vault.token = token;
+  }
 
-function initVault(serverAddress) {
-  options = {
-    apiVersion: 'v1',
-    endpoint: serverAddress
-  };
-  vault = require("node-vault")(options);
-}
+  function connectToServer() {
+    var serverAddress = $("#serverAddress").val();
+    initVault(serverAddress);
+  }
 
-function getMountedAuthBackends() {
-  vault.auths()
-    .then((result) => successfulAuthMountsQueryHandler(result))
-    .catch((err) => console.error(err));
-}
+  function updateSealStatus(newStatus) {
+    $("#status").val(newStatus.sealed);
+  }
 
-function successfulAuthMountsQueryHandler(mountsDictionary) {
-  $("#authBackends").val(JSON.stringify(mountsDictionary, null, 4));
-}
+  function updateStatus() {
+    vault.status()
+      .then(function(result) {
+        document.getElementById("keyCount").innerHTML = result.n;
+        document.getElementById("progress").innerHTML = result.progress;
+        document.getElementById("threshold").innerHTML = result.t;
+        document.getElementById("status").innerHTML = result.sealed;
+        document.getElementById("isConnected").innerHTML = true;
+        document.getElementById("isAuthenticated").innerHTML = isAuthenticated();
+      });
+  }
 
-function getMountedSecretBackends() {
-  vault.mounts()
-    .then((result) => successfulMountsQueryHandler(result))
-    .catch((err) => console.error(err));
-}
+  function isAuthenticated() {
+    return vault.token !== undefined
+  }
 
-function successfulMountsQueryHandler(mountsDictionary) {
-  $("#secretBackends").val(JSON.stringify(mountsDictionary, null, 4));
-}
+  function seal() {
+    vault.seal()
+    .then(function() {
+      updateStatus();
+    });
+  }
 
-function userpassAuthenticate() {
-  var username = $("#username").val();
-  var password = $("#password").val();
+  function unseal() {
+    var key = $("#key").val();
+    unsealVault(key);
+    $("#key").val('');
+  }
 
-  vault.userpassLogin({username, password})
-    .then((result) => setAuthenticationToken(result.auth.client_token))
-    .then(updateStatus);
-}
+  function unsealVault(unsealKey) {
+    vault.unseal({key:unsealKey})
+      .then(updateStatus);
+  }
 
-function githubAuthenticate() {
-  var token = $("#githubToken").val();
+  function initVault(serverAddress) {
+    options = {
+      apiVersion: 'v1',
+      endpoint: serverAddress
+    };
+    vault = require("node-vault")(options);
+  }
 
-  vault.githubLogin({ token })
-    .then((result) => setAuthenticationToken(result.auth.client_token))
-    .then(updateStatus);
-}
+  function getMountedAuthBackends() {
+    vault.auths()
+      .then((result) => successfulAuthMountsQueryHandler(result))
+      .catch((err) => console.error(err));
+  }
 
-function readSecrets() {
-  vault.read($("#mountPoint").val())
-    .then((result) => successfulSecretQueryHandler(result.data))
-    .catch((result) => failedSecretQueryHandler(result));
-}
+  function successfulAuthMountsQueryHandler(mountsDictionary) {
+    $("#authBackends").val(JSON.stringify(mountsDictionary, null, 4));
+  }
 
-function successfulSecretQueryHandler(secrets) {
-  $("#secrets").val(formatSecrets(secrets));
-}
+  function getMountedSecretBackends() {
+    vault.mounts()
+      .then((result) => successfulMountsQueryHandler(result))
+      .catch((err) => console.error(err));
+  }
 
-function failedSecretQueryHandler(result) {
-  $("#secrets").text(result);
-}
+  function successfulMountsQueryHandler(mountsDictionary) {
+    $("#secretBackends").val(JSON.stringify(mountsDictionary, null, 4));
+  }
 
-function formatSecrets(secrets) {
-  var output = JSON.stringify(secrets, null, 4);
-  return output;
-}
+  function userpassAuthenticate() {
+    var username = $("#username").val();
+    var password = $("#password").val();
+
+    vault.userpassLogin({username, password})
+      .then((result) => setAuthenticationToken(result.auth.client_token))
+      .then(updateStatus);
+  }
+
+  function githubAuthenticate() {
+    var token = $("#githubToken").val();
+
+    vault.githubLogin({ token })
+      .then((result) => setAuthenticationToken(result.auth.client_token))
+      .then(updateStatus);
+  }
+
+  function readSecrets() {
+    vault.read($("#mountPoint").val())
+      .then((result) => successfulSecretQueryHandler(result.data))
+      .catch((result) => failedSecretQueryHandler(result));
+  }
+
+  function successfulSecretQueryHandler(secrets) {
+    $("#secrets").val(formatSecrets(secrets));
+  }
+
+  function failedSecretQueryHandler(result) {
+    $("#secrets").text(result);
+  }
+
+  function formatSecrets(secrets) {
+    var output = JSON.stringify(secrets, null, 4);
+    return output;
+  }
+});
