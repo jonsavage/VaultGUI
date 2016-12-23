@@ -9,7 +9,6 @@ app.controller('vaultController', function($scope) {
 
   $(function() {
     $("#getStatus").click(updateStatus);
-    $("#setTokenButton").click(setAuthenticationTokenHandler);
     $("#getAuthMountsButton").click(getMountedAuthBackends);
     $("#getMountsButton").click(getMountedSecretBackends);
     $("#userpassButton").click(userpassAuthenticate);
@@ -35,7 +34,7 @@ app.controller('vaultController', function($scope) {
     });
   }
 
-  function setAuthenticationTokenHandler() {
+  $scope.setToken = function() {
     var token =  $("#token").val();
     setAuthenticationToken(token);
     updateStatus();
