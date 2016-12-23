@@ -9,7 +9,6 @@ app.controller('vaultController', function($scope) {
 
   $(function() {
     $("#getStatus").click(updateStatus);
-    $("#getAuthMountsButton").click(getMountedAuthBackends);
   });
 
   $scope.connect = function() {
@@ -65,6 +64,12 @@ app.controller('vaultController', function($scope) {
       .catch((err) => console.error(err));
   }
 
+  $scope.getMountedAuthBackends = function() {
+    vault.auths()
+      .then((result) => successfulAuthMountsQueryHandler(result))
+      .catch((err) => console.error(err));
+  }
+
   function setAuthenticationToken(token) {
     vault.token = token;
   }
@@ -102,12 +107,6 @@ app.controller('vaultController', function($scope) {
       endpoint: serverAddress
     };
     vault = require("node-vault")(options);
-  }
-
-  function getMountedAuthBackends() {
-    vault.auths()
-      .then((result) => successfulAuthMountsQueryHandler(result))
-      .catch((err) => console.error(err));
   }
 
   function successfulAuthMountsQueryHandler(mountsDictionary) {
