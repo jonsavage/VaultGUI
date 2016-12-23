@@ -8,10 +8,6 @@ app.controller('vaultController', function($scope) {
   $scope.sealStatus;
 
   $(function() {
-    $("#connectButton").click(function() {
-      connectToServer();
-      updateStatus();
-    });
     $("#getStatus").click(updateStatus);
     $("#unsealButton").click(unseal);
     $("#setTokenButton").click(setAuthenticationTokenHandler);
@@ -22,6 +18,11 @@ app.controller('vaultController', function($scope) {
     $("#githubButton").click(githubAuthenticate);
     $("#readSecretsButton").click(readSecrets);
   });
+
+  $scope.connect = function() {
+    connectToServer();
+    updateStatus();
+  }
 
   function setAuthenticationTokenHandler() {
     var token =  $("#token").val();
