@@ -11,7 +11,6 @@ app.controller('vaultController', function($scope) {
     $("#getStatus").click(updateStatus);
     $("#getAuthMountsButton").click(getMountedAuthBackends);
     $("#getMountsButton").click(getMountedSecretBackends);
-    $("#githubButton").click(githubAuthenticate);
     $("#readSecretsButton").click(readSecrets);
   });
 
@@ -44,6 +43,14 @@ app.controller('vaultController', function($scope) {
     var password = $("#password").val();
 
     vault.userpassLogin({ username, password })
+      .then((result) => setAuthenticationToken(result.auth.client_token))
+      .then(updateStatus);
+  }
+
+  $scope.authenticateGitHub = function() {
+    var token = $("#githubToken").val();
+
+    vault.githubLogin({ token })
       .then((result) => setAuthenticationToken(result.auth.client_token))
       .then(updateStatus);
   }
@@ -105,14 +112,6 @@ app.controller('vaultController', function($scope) {
 
   function successfulMountsQueryHandler(mountsDictionary) {
     $("#secretBackends").val(JSON.stringify(mountsDictionary, null, 4));
-  }
-
-  function githubAuthenticate() {
-    var token = $("#githubToken").val();
-
-    vault.githubLogin({ token })
-      .then((result) => setAuthenticationToken(result.auth.client_token))
-      .then(updateStatus);
   }
 
   function readSecrets() {
