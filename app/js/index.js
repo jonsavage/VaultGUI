@@ -3,6 +3,10 @@ var vault;
 
 var app = angular.module('vaultGui', []);
 app.controller('vaultController', function($scope) {
+  $scope.connectionStatus = false;
+  $scope.authenticationStatus;
+  $scope.sealStatus;
+
   $(function() {
     $("#connectButton").click(function() {
       connectToServer();
@@ -34,24 +38,21 @@ app.controller('vaultController', function($scope) {
     initVault(serverAddress);
   }
 
-  function updateSealStatus(newStatus) {
-    $("#status").val(newStatus.sealed);
-  }
-
   function updateStatus() {
     vault.status()
       .then(function(result) {
         document.getElementById("keyCount").innerHTML = result.n;
         document.getElementById("progress").innerHTML = result.progress;
         document.getElementById("threshold").innerHTML = result.t;
-        document.getElementById("status").innerHTML = result.sealed;
-        document.getElementById("isConnected").innerHTML = true;
-        document.getElementById("isAuthenticated").innerHTML = isAuthenticated();
+        $scope.sealStatus = result.sealed;
+        $scope.connectionStatus = true;
+        $scope.authenticationStatus = isAuthenticated();
+        $scope.$apply();
       });
   }
 
   function isAuthenticated() {
-    return vault.token !== undefined
+    return vault.token !== undefined;
   }
 
   function seal() {
@@ -104,7 +105,7 @@ app.controller('vaultController', function($scope) {
     var username = $("#username").val();
     var password = $("#password").val();
 
-    vault.userpassLogin({username, password})
+    vault.userpassLogin({ username, password })
       .then((result) => setAuthenticationToken(result.auth.client_token))
       .then(updateStatus);
   }
