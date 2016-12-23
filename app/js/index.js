@@ -9,7 +9,6 @@ app.controller('vaultController', function($scope) {
 
   $(function() {
     $("#getStatus").click(updateStatus);
-    $("#unsealButton").click(unseal);
     $("#setTokenButton").click(setAuthenticationTokenHandler);
     $("#getAuthMountsButton").click(getMountedAuthBackends);
     $("#getMountsButton").click(getMountedSecretBackends);
@@ -22,6 +21,12 @@ app.controller('vaultController', function($scope) {
   $scope.connect = function() {
     connectToServer();
     updateStatus();
+  }
+
+  $scope.unseal = function() {
+    var key = $("#key").val();
+    unsealVault(key);
+    $("#key").val('');
   }
 
   function setAuthenticationTokenHandler() {
@@ -61,12 +66,6 @@ app.controller('vaultController', function($scope) {
     .then(function() {
       updateStatus();
     });
-  }
-
-  function unseal() {
-    var key = $("#key").val();
-    unsealVault(key);
-    $("#key").val('');
   }
 
   function unsealVault(unsealKey) {
