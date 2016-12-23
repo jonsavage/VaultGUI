@@ -11,7 +11,6 @@ app.controller('vaultController', function($scope) {
     $("#getStatus").click(updateStatus);
     $("#getAuthMountsButton").click(getMountedAuthBackends);
     $("#getMountsButton").click(getMountedSecretBackends);
-    $("#readSecretsButton").click(readSecrets);
   });
 
   $scope.connect = function() {
@@ -53,6 +52,12 @@ app.controller('vaultController', function($scope) {
     vault.githubLogin({ token })
       .then((result) => setAuthenticationToken(result.auth.client_token))
       .then(updateStatus);
+  }
+
+  $scope.readSecrets = function() {
+    vault.read($("#mountPoint").val())
+      .then((result) => successfulSecretQueryHandler(result.data))
+      .catch((result) => failedSecretQueryHandler(result));
   }
 
   function setAuthenticationToken(token) {
@@ -112,12 +117,6 @@ app.controller('vaultController', function($scope) {
 
   function successfulMountsQueryHandler(mountsDictionary) {
     $("#secretBackends").val(JSON.stringify(mountsDictionary, null, 4));
-  }
-
-  function readSecrets() {
-    vault.read($("#mountPoint").val())
-      .then((result) => successfulSecretQueryHandler(result.data))
-      .catch((result) => failedSecretQueryHandler(result));
   }
 
   function successfulSecretQueryHandler(secrets) {
