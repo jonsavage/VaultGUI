@@ -1,8 +1,47 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+function NavBar(props) {
+  return (
+    <ul>
+      <li>
+        <label for="isConnected">Is Connected:</label>
+        <label id="isConnected">{props.isConnected.toString()}</label>
+      </li>
+      <li>
+        <label for="isAuthenticated">Is Authenticated:</label>
+        <label id="isAuthenticated">{props.isAuthenticated.toString()}</label>
+      </li>
+      <li>
+        <label for="status">Is Sealed:</label>
+        <label id="status">{props.isSealed.toString()}</label>
+      </li>
+    </ul>
+  );
+}
+
+class Page extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isConnected: false,
+      isAuthenticated: false,
+      isSealed: true
+    };
+  }
+  render() {
+    return (
+      <NavBar
+        isConnected={this.state.isConnected}
+        isAuthenticated={this.state.isAuthenticated}
+        isSealed={this.state.isSealed}
+      />
+    );
+  }
+}
+
 ReactDOM.render(
-  <h1>Hello, world!</h1>,
+  <Page />,
   document.getElementById('root')
 );
 
