@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "electron app.js",
-    "test": "gulp"
+    "test": "gulp",
+    "build": "babel app/js -d app/lib"
   },
   "repository": {
     "type": "git",
