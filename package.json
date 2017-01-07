@@ -26,6 +26,8 @@
     "node-vault": "~>0.5.1"
   },
   "dependencies": {
-    "phantom": "^2.1.17"
+    "phantom": "^2.1.17",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
   }
 }
