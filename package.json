@@ -15,6 +15,7 @@
   "author": "Jon Savage",
   "devDependencies": {
     "babel-cli": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
     "bootstrap": "~>3.3.7",
     "electron-prebuilt": "~1.2.1",
     "gulp": "^3.9.1",
