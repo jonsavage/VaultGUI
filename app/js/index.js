@@ -24,7 +24,7 @@ function NavBar(props) {
       </li>
       <li>
         <label for="status">Is Sealed:</label>
-        <label id="status">{props.isSealed.toString()}</label>
+        <label id="status">{props.isSealed && props.isSealed.toString()}</label>
       </li>
     </ul>
   );
@@ -69,18 +69,53 @@ class Page extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      vault: null,
+      options: null,
       isConnected: false,
       isAuthenticated: false,
-      isSealed: true
+      isSealed: null,
+      keyCount: null,
+      progress: null,
+      threshold: null,
+      token: null
     };
     this.handleConnect = this.handleConnect.bind(this);
   }
 
+  initVault(url) {
+    this.setState({isConnected: true});
+    var options = {
+      apiVersion: 'v1',
+      endpoint: url
+    };
+    var vault = require("node-vault")(options);
+
+    this.setState({vault: vault}, () => {
+      this.refreshStatus();
+    });
+
+    console.log(this.state.vault);
+  }
+
+  refreshStatus() {
+    console.log("refreshStatus");
+    console.log(this.state.vault);
+    this.state.vault.status()
+      .then((result) => {
+        console.log("result:");
+        console.log(result);
+        // this.setState({keyCount: result.n});
+        // this.setState({progress: result.progress});
+        // this.setState({threshold: result.t});
+        this.setState({isSealed: result.sealed});
+        this.setState({isAuthenticated: this.state.token ? true : false});
+        this.setState({keyCount: result.n});
+    });
+  }
+
   handleConnect(url) {
     console.log("url: " + url);
-    // this.setState(prevState => ({
-    //   isConnected: !prevState.isConnected
-    // }));
+    this.initVault(url);
   }
 
   render() {
