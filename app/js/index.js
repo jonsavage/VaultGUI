@@ -20,6 +20,37 @@ function NavBar(props) {
   );
 }
 
+class ConnectionForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {url: ''};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({url: event.target.value});
+  }
+
+  handleSubmit(event) {
+    this.props.onSubmit(this.state.url);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Server Url:
+          <input type="text" value={this.state.url} onChange={this.handleChange} placeholder="https://serveraddress.com:8200"/>
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+}
+
 class Page extends React.Component {
   constructor(props) {
     super(props);
@@ -28,14 +59,26 @@ class Page extends React.Component {
       isAuthenticated: false,
       isSealed: true
     };
+    this.handleConnect = this.handleConnect.bind(this);
   }
+
+  handleConnect(url) {
+    console.log("url: " + url);
+    // this.setState(prevState => ({
+    //   isConnected: !prevState.isConnected
+    // }));
+  }
+
   render() {
     return (
-      <NavBar
-        isConnected={this.state.isConnected}
-        isAuthenticated={this.state.isAuthenticated}
-        isSealed={this.state.isSealed}
-      />
+      <div>
+        <NavBar
+          isConnected={this.state.isConnected}
+          isAuthenticated={this.state.isAuthenticated}
+          isSealed={this.state.isSealed}
+        />
+        <ConnectionForm onSubmit={this.handleConnect}/>
+      </div>
     );
   }
 }

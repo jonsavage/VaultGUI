@@ -4,7 +4,7 @@
   "description": "description",
   "main": "app.js",
   "scripts": {
-    "start": "electron app.js",
+    "start": "babel app/js -d app/lib && electron app.js",
     "test": "gulp",
     "build": "babel app/js -d app/lib"
   },
