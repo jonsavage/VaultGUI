@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
@@ -48,13 +50,17 @@ class ConnectionForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Server Url:
-          <input type="text" value={this.state.url} onChange={this.handleChange} placeholder="https://serveraddress.com:8200"/>
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+        <form onSubmit={this.handleSubmit}>
+          <TextField
+            floatingLabelText="Server Url"
+            hintText="http://vaultserver.com:8200"
+            value={this.state.url}
+            onChange={this.handleChange}/>
+          <RaisedButton
+            type="submit"
+            label="Connect"
+            primary={true}/>
+        </form>
     );
   }
 }
@@ -92,7 +98,10 @@ class Page extends React.Component {
 }
 
 ReactDOM.render(
-  <Page />,
+  (
+  <MuiThemeProvider>
+    <Page />
+  </MuiThemeProvider>),
   document.getElementById('root')
 );
 
