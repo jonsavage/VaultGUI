@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import Authentication from '../components/Authentication';
 import ConnectionForm from '../components/ConnectionForm';
 import NavBar from '../components/NavBar';
 
@@ -15,10 +16,10 @@ class Page extends React.Component {
       isSealed: null,
       keyCount: null,
       progress: null,
-      threshold: null,
-      token: null
+      threshold: null
     };
     this.handleConnect = this.handleConnect.bind(this);
+    this.handleRootTokenAuthentication = this.handleRootTokenAuthentication.bind(this);
   }
 
   initVault(url) {
@@ -32,29 +33,29 @@ class Page extends React.Component {
     this.setState({vault: vault}, () => {
       this.refreshStatus();
     });
-
-    console.log(this.state.vault);
   }
 
   refreshStatus() {
-    console.log("refreshStatus");
-    console.log(this.state.vault);
     this.state.vault.status()
       .then((result) => {
-        console.log("result:");
-        console.log(result);
-        // this.setState({keyCount: result.n});
-        // this.setState({progress: result.progress});
-        // this.setState({threshold: result.t});
         this.setState({isSealed: result.sealed});
-        this.setState({isAuthenticated: this.state.token ? true : false});
+        this.setState({isAuthenticated: this.state.vault.token ? true : false});
         this.setState({keyCount: result.n});
     });
   }
 
   handleConnect(url) {
-    console.log("url: " + url);
     this.initVault(url);
+  }
+
+  handleRootTokenAuthentication(token) {
+    var vault = this.state.vault;
+
+    vault.token = token;
+
+    this.setState({vault: vault}, () => {
+      this.refreshStatus();
+    });
   }
 
   render() {
@@ -65,7 +66,9 @@ class Page extends React.Component {
           isAuthenticated={this.state.isAuthenticated}
           isSealed={this.state.isSealed}
         />
+
         <ConnectionForm onSubmit={this.handleConnect}/>
+        <Authentication rootTokenHandler={this.handleRootTokenAuthentication}/>
       </div>
     );
   }
