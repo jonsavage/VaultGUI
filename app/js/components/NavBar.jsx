@@ -1,6 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import FontIcon from 'material-ui/FontIcon';
+
+function BooleanStatus(props) {
+  const value = props.value;
+  if (value) {
+    return <FontIcon className="material-icons">check</FontIcon>;
+  }
+  return <FontIcon className="material-icons">close</FontIcon>;
+}
+
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
@@ -11,15 +21,15 @@ class NavBar extends React.Component {
       <ul>
         <li>
           <label for="isConnected">Is Connected:</label>
-          <label id="isConnected">{this.props.isConnected.toString()}</label>
+          <BooleanStatus value={this.props.isConnected}/>
         </li>
         <li>
           <label for="isAuthenticated">Is Authenticated:</label>
-          <label id="isAuthenticated">{this.props.isAuthenticated.toString()}</label>
+          <BooleanStatus value={this.props.isAuthenticated}/>
         </li>
         <li>
           <label for="status">Is Sealed:</label>
-          <label id="status">{this.props.isSealed && this.props.isSealed.toString()}</label>
+          <BooleanStatus value={this.props.isSealed}/>
         </li>
       </ul>
     );
