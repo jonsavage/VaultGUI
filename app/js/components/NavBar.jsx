@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import FontIcon from 'material-ui/FontIcon';
+import RaisedButton from 'material-ui/RaisedButton';
 
 function BooleanStatus(props) {
   const value = props.value;
@@ -17,7 +18,11 @@ class NavBar extends React.Component {
   }
 
   render() {
-    return (
+    const canSeal = this.props.isConnected
+                      && this.props.isAuthenticated
+                      && !this.props.isSealed;
+
+     return (
       <ul>
         <li>
           <label for="isConnected">Is Connected:</label>
@@ -30,7 +35,12 @@ class NavBar extends React.Component {
         <li>
           <label for="status">Is Sealed:</label>
           <BooleanStatus value={this.props.isSealed}/>
+          <RaisedButton
+            label="Seal"
+            disabled={!canSeal}
+            onClick={this.props.sealHandler}/>
         </li>
+
       </ul>
     );
   }

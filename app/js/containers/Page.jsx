@@ -20,6 +20,7 @@ class Page extends React.Component {
     };
     this.handleConnect = this.handleConnect.bind(this);
     this.handleRootTokenAuthentication = this.handleRootTokenAuthentication.bind(this);
+    this.handleSeal = this.handleSeal.bind(this);
     this.handleUserPassAuthentication = this.handleUserPassAuthentication.bind(this);
   }
 
@@ -68,6 +69,13 @@ class Page extends React.Component {
     });
   }
 
+  handleSeal() {
+    this.state.vault.seal()
+      .then( () =>
+        this.refreshStatus()
+      );
+  }
+
   render() {
     return (
       <div>
@@ -75,6 +83,7 @@ class Page extends React.Component {
           isConnected={this.state.isConnected}
           isAuthenticated={this.state.isAuthenticated}
           isSealed={this.state.isSealed}
+          sealHandler={this.handleSeal}
         />
         <ConnectionForm onSubmit={this.handleConnect}/>
         <Authentication
