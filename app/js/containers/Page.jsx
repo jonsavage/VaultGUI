@@ -20,6 +20,7 @@ class Page extends React.Component {
     };
     this.handleConnect = this.handleConnect.bind(this);
     this.handleRootTokenAuthentication = this.handleRootTokenAuthentication.bind(this);
+    this.handleUserPassAuthentication = this.handleUserPassAuthentication.bind(this);
   }
 
   initVault(url) {
@@ -49,6 +50,15 @@ class Page extends React.Component {
   }
 
   handleRootTokenAuthentication(token) {
+    this.setVaultTokenAndGetStatus(token);
+  }
+
+  handleUserPassAuthentication(username, password) {
+    this.state.vault.userpassLogin({ username, password })
+      .then((result) => this.setVaultTokenAndGetStatus(result.auth.client_token));
+  }
+
+  setVaultTokenAndGetStatus(token) {
     var vault = this.state.vault;
 
     vault.token = token;
@@ -66,9 +76,11 @@ class Page extends React.Component {
           isAuthenticated={this.state.isAuthenticated}
           isSealed={this.state.isSealed}
         />
-
         <ConnectionForm onSubmit={this.handleConnect}/>
-        <Authentication rootTokenHandler={this.handleRootTokenAuthentication}/>
+        <Authentication
+          rootTokenHandler={this.handleRootTokenAuthentication}
+          userPassAutheticationHandler={this.handleUserPassAuthentication}
+        />
       </div>
     );
   }
