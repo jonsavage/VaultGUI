@@ -5,6 +5,8 @@ A cross-platform desktop app for interacting with a Hashicorp Vault server (chec
 Node-Vault is a super useful package that handles all interaction with the Vauth Server REST API: https://github.com/kr1sp1n/node-vault
 
 Build Instructions:
+Uses: node `7.4.0`
+
 After cloning all you should need to do is run `npm start` or `electron .`. 
 All of the node_modules are checked in to verison control making things simpler.
 
