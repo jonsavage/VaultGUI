@@ -7,9 +7,6 @@ import RootTokenAuthentication from './RootTokenAuthentication';
 import UserPassAuthentication from './UserPassAuthentication';
 
 class Authentication extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (
