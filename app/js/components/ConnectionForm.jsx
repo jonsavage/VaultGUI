@@ -5,22 +5,16 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
 class ConnectionForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {url: ''};
+  state = {url: ''};
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(event) {
+  handleChange = (event) => {
     this.setState({url: event.target.value});
-  }
+  };
 
-  handleSubmit(event) {
+  handleSubmit = (event) => {
     this.props.onSubmit(this.state.url);
     event.preventDefault();
-  }
+  };
 
   render() {
     return (
