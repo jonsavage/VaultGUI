@@ -13,9 +13,6 @@ function BooleanStatus(props) {
 }
 
 class NavBar extends React.Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     const canSeal = this.props.isConnected
