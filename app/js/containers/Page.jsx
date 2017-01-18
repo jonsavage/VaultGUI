@@ -35,11 +35,14 @@ class Page extends React.Component {
   refreshStatus = () => {
     this.state.vault.status()
       .then((result) => {
-        this.setState({isSealed: result.sealed});
-        this.setState({isAuthenticated: this.state.vault.token ? true : false});
-        this.setState({keyCount: result.n});
-        this.setState({progress: result.progress});
-        this.setState({threshold: result.t});
+        this.setState(
+          {
+            isSealed: result.sealed,
+            isAuthenticated: this.state.vault.token ? true : false,
+            keyCount: result.n,
+            progress: result.progress,
+            threshold: result.t
+        });
     });
   };
 
