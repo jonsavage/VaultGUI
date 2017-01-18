@@ -71,6 +71,33 @@ class Page extends React.Component {
   };
 
   render = () => {
+    let visibleElement = null;
+
+    if(!this.state.isConnected) {
+      visibleElement = (
+        <ConnectionForm onSubmit={this.handleConnect}/>
+      );
+    }
+    else if(this.state.isSealed){
+      visibleElement = (
+        <p>The Vault is Sealed.\n
+          Unsealing the Vault is currently unsupported.\n
+          Please manually `vault unseal key` the Vault and return.
+        </p>
+      );
+    }
+    else if(!this.state.isAuthenticated) {
+      visibleElement = (
+        <Authentication
+          rootTokenHandler={this.handleRootTokenAuthentication}
+          userPassAutheticationHandler={this.handleUserPassAuthentication}
+        />
+      );
+    } else {
+      visibleElement = (
+        <p> You have successfully authenticated to an unsealed vault. This is where the fun stuff will happen in the future.</p>
+      );
+    }
     return (
       <div>
         <NavBar
@@ -79,11 +106,7 @@ class Page extends React.Component {
           isSealed={this.state.isSealed}
           sealHandler={this.handleSeal}
         />
-        <ConnectionForm onSubmit={this.handleConnect}/>
-        <Authentication
-          rootTokenHandler={this.handleRootTokenAuthentication}
-          userPassAutheticationHandler={this.handleUserPassAuthentication}
-        />
+        {visibleElement}
       </div>
     );
   }
