@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import Authentication from '../components/Authentication';
 import ConnectionForm from '../components/ConnectionForm';
 import NavBar from '../components/NavBar';
+import Unseal from '../components/Unseal';
 
 class Page extends React.Component {
 
@@ -37,6 +38,8 @@ class Page extends React.Component {
         this.setState({isSealed: result.sealed});
         this.setState({isAuthenticated: this.state.vault.token ? true : false});
         this.setState({keyCount: result.n});
+        this.setState({progress: result.progress});
+        this.setState({threshold: result.t});
     });
   };
 
@@ -70,6 +73,13 @@ class Page extends React.Component {
       );
   };
 
+  handleUnseal = (key) => {
+    this.state.vault.unseal({key: key})
+      .then( () =>
+        this.refreshStatus()
+      );
+  };
+
   render = () => {
     let visibleElement = null;
 
@@ -80,10 +90,12 @@ class Page extends React.Component {
     }
     else if(this.state.isSealed){
       visibleElement = (
-        <p>The Vault is Sealed.\n
-          Unsealing the Vault is currently unsupported.\n
-          Please manually `vault unseal key` the Vault and return.
-        </p>
+        <Unseal
+          keyCount={this.state.keyCount}
+          progress={this.state.progress}
+          threshold={this.state.threshold}
+          onSubmit={this.handleUnseal}
+        />
       );
     }
     else if(!this.state.isAuthenticated) {
