@@ -6,25 +6,19 @@ import ConnectionForm from '../components/ConnectionForm';
 import NavBar from '../components/NavBar';
 
 class Page extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      vault: null,
-      options: null,
-      isConnected: false,
-      isAuthenticated: false,
-      isSealed: null,
-      keyCount: null,
-      progress: null,
-      threshold: null
-    };
-    this.handleConnect = this.handleConnect.bind(this);
-    this.handleRootTokenAuthentication = this.handleRootTokenAuthentication.bind(this);
-    this.handleSeal = this.handleSeal.bind(this);
-    this.handleUserPassAuthentication = this.handleUserPassAuthentication.bind(this);
-  }
 
-  initVault(url) {
+  state = {
+    vault: null,
+    options: null,
+    isConnected: false,
+    isAuthenticated: false,
+    isSealed: null,
+    keyCount: null,
+    progress: null,
+    threshold: null
+  };
+
+  initVault = (url) => {
     this.setState({isConnected: true});
     var options = {
       apiVersion: 'v1',
@@ -35,31 +29,31 @@ class Page extends React.Component {
     this.setState({vault: vault}, () => {
       this.refreshStatus();
     });
-  }
+  };
 
-  refreshStatus() {
+  refreshStatus = () => {
     this.state.vault.status()
       .then((result) => {
         this.setState({isSealed: result.sealed});
         this.setState({isAuthenticated: this.state.vault.token ? true : false});
         this.setState({keyCount: result.n});
     });
-  }
+  };
 
-  handleConnect(url) {
+  handleConnect = (url) => {
     this.initVault(url);
-  }
+  };
 
-  handleRootTokenAuthentication(token) {
+  handleRootTokenAuthentication = (token) => {
     this.setVaultTokenAndGetStatus(token);
-  }
+  };
 
-  handleUserPassAuthentication(username, password) {
+  handleUserPassAuthentication = (username, password) => {
     this.state.vault.userpassLogin({ username, password })
       .then((result) => this.setVaultTokenAndGetStatus(result.auth.client_token));
-  }
+  };
 
-  setVaultTokenAndGetStatus(token) {
+  setVaultTokenAndGetStatus = (token) => {
     var vault = this.state.vault;
 
     vault.token = token;
@@ -67,16 +61,16 @@ class Page extends React.Component {
     this.setState({vault: vault}, () => {
       this.refreshStatus();
     });
-  }
+  };
 
-  handleSeal() {
+  handleSeal = () => {
     this.state.vault.seal()
       .then( () =>
         this.refreshStatus()
       );
-  }
+  };
 
-  render() {
+  render = () => {
     return (
       <div>
         <NavBar
