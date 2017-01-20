@@ -1,128 +1,20 @@
-var options;
-var vault;
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-var app = angular.module('vaultGui', []);
-app.controller('vaultController', function($scope) {
-  $scope.connectionStatus = false;
-  $scope.authenticationStatus;
-  $scope.sealStatus;
+import Page from './lib/containers/Page';
 
-  $scope.connect = function() {
-    connectToServer();
-    updateStatus();
-  }
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-  $scope.unseal = function() {
-    var key = $("#key").val();
-    unsealVault(key);
-    $("#key").val('');
-  }
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
-  $scope.seal = function() {
-    vault.seal()
-    .then(function() {
-      updateStatus();
-    });
-  }
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
 
-  $scope.setToken = function() {
-    var token =  $("#token").val();
-    setAuthenticationToken(token);
-    updateStatus();
-  }
-
-  $scope.authenticateUserPass = function() {
-    var username = $("#username").val();
-    var password = $("#password").val();
-
-    vault.userpassLogin({ username, password })
-      .then((result) => setAuthenticationToken(result.auth.client_token))
-      .then(updateStatus);
-  }
-
-  $scope.authenticateGitHub = function() {
-    var token = $("#githubToken").val();
-
-    vault.githubLogin({ token })
-      .then((result) => setAuthenticationToken(result.auth.client_token))
-      .then(updateStatus);
-  }
-
-  $scope.readSecrets = function() {
-    vault.read($("#mountPoint").val())
-      .then((result) => successfulSecretQueryHandler(result.data))
-      .catch((result) => failedSecretQueryHandler(result));
-  }
-
-  $scope.getMountedSecretBackends = function() {
-    vault.mounts()
-      .then((result) => successfulMountsQueryHandler(result))
-      .catch((err) => console.error(err));
-  }
-
-  $scope.getMountedAuthBackends = function() {
-    vault.auths()
-      .then((result) => successfulAuthMountsQueryHandler(result))
-      .catch((err) => console.error(err));
-  }
-
-  function setAuthenticationToken(token) {
-    vault.token = token;
-  }
-
-  function connectToServer() {
-    var serverAddress = $("#serverAddress").val();
-    initVault(serverAddress);
-  }
-
-  function updateStatus() {
-    vault.status()
-      .then(function(result) {
-        document.getElementById("keyCount").innerHTML = result.n;
-        document.getElementById("progress").innerHTML = result.progress;
-        document.getElementById("threshold").innerHTML = result.t;
-        $scope.sealStatus = result.sealed;
-        $scope.connectionStatus = true;
-        $scope.authenticationStatus = isAuthenticated();
-        $scope.$apply();
-      });
-  }
-
-  function isAuthenticated() {
-    return vault.token !== undefined;
-  }
-
-  function unsealVault(unsealKey) {
-    vault.unseal({key:unsealKey})
-      .then(updateStatus);
-  }
-
-  function initVault(serverAddress) {
-    options = {
-      apiVersion: 'v1',
-      endpoint: serverAddress
-    };
-    vault = require("node-vault")(options);
-  }
-
-  function successfulAuthMountsQueryHandler(mountsDictionary) {
-    $("#authBackends").val(JSON.stringify(mountsDictionary, null, 4));
-  }
-
-  function successfulMountsQueryHandler(mountsDictionary) {
-    $("#secretBackends").val(JSON.stringify(mountsDictionary, null, 4));
-  }
-
-  function successfulSecretQueryHandler(secrets) {
-    $("#secrets").val(formatSecrets(secrets));
-  }
-
-  function failedSecretQueryHandler(result) {
-    $("#secrets").text(result);
-  }
-
-  function formatSecrets(secrets) {
-    var output = JSON.stringify(secrets, null, 4);
-    return output;
-  }
-});
+ReactDOM.render(
+  (
+  <MuiThemeProvider>
+    <Page />
+  </MuiThemeProvider>),
+  document.getElementById('root')
+);
