@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import Authentication from '../components/Authentication';
 import ConnectionForm from '../components/ConnectionForm';
+import Mounts from '../components/Mounts';
 import NavBar from '../components/NavBar';
 import Unseal from '../components/Unseal';
 
@@ -16,7 +17,8 @@ class Page extends React.Component {
     isSealed: null,
     keyCount: null,
     progress: null,
-    threshold: null
+    threshold: null,
+    auths: null
   };
 
   initVault = (url) => {
@@ -83,6 +85,13 @@ class Page extends React.Component {
       );
   };
 
+  handleGetAuths = () => {
+    this.state.vault.auths()
+      .then((result) => {
+        this.setState({auths: JSON.stringify(result, null, 4)});
+      });
+  };
+
   render = () => {
     let visibleElement = null;
 
@@ -109,8 +118,9 @@ class Page extends React.Component {
         />
       );
     } else {
+      this.handleGetAuths();
       visibleElement = (
-        <p> You have successfully authenticated to an unsealed vault. This is where the fun stuff will happen in the future.</p>
+        <Mounts auths={this.state.auths}/>
       );
     }
     return (
