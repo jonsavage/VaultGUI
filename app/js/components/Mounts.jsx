@@ -12,7 +12,7 @@ class Mounts extends React.Component {
           <textarea value={this.props.auths}></textarea>
         </Tab>
         <Tab label="Auth Backends" >
-          <p>Future home og Secret Backend searches</p>
+          <textarea value={this.props.mounts}></textarea>
         </Tab>
       </Tabs>
     );
