@@ -7,8 +7,9 @@ Node-Vault is a super useful package that handles all interaction with the Vauth
 Build Instructions:
 Uses: node `7.4.0`
 
-After cloning all you should need to do is run `npm start` or `electron .`. 
-All of the node_modules are checked in to verison control making things simpler.
+After cloning:
+run `npm install`
+run `npm run start` 
 
 Feel free to contribute or submit issues as needed.
 
