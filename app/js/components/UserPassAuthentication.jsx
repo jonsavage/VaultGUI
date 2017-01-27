@@ -33,7 +33,8 @@ class UserPassAuthentication extends React.Component {
           <TextField
             floatingLabelText="Password"
             value={this.state.password}
-            onChange={this.handlePasswordChange}/>
+            onChange={this.handlePasswordChange}
+            type="password"/>
           <RaisedButton
             type="submit"
             label="Connect"
