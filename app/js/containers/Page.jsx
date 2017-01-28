@@ -18,8 +18,6 @@ class Page extends React.Component {
     keyCount: null,
     progress: null,
     threshold: null,
-    auths: null,
-    mounts: null
   };
 
   initVault = (url) => {
@@ -86,19 +84,13 @@ class Page extends React.Component {
       );
   };
 
-  handleGetAuths = () => {
-    this.state.vault.auths()
-      .then((result) => {
-        this.setState({auths: JSON.stringify(result, null, 4)});
-      });
-  };
+  getMounts = () => {
+    return this.state.vault.mounts();
+  }
 
-  handleGetMounts = () => {
-    this.state.vault.mounts()
-      .then((result) => {
-        this.setState({mounts: JSON.stringify(result, null, 4)});
-      });
-  };
+  getAuths = () => {
+    return this.state.vault.auths();
+  }
 
   render = () => {
     let visibleElement = null;
@@ -126,10 +118,11 @@ class Page extends React.Component {
         />
       );
     } else {
-      this.handleGetAuths();
-      this.handleGetMounts();
       visibleElement = (
-        <Mounts auths={this.state.auths} mounts={this.state.mounts}/>
+        <Mounts
+          getAuths={this.getAuths}
+          getMounts={this.getMounts}
+         />
       );
     }
     return (
