@@ -5,6 +5,7 @@ import Authentication from '../components/Authentication';
 import ConnectionForm from '../components/ConnectionForm';
 import Mounts from '../components/Mounts';
 import NavBar from '../components/NavBar';
+import Secrets from '../components/Secrets';
 import Unseal from '../components/Unseal';
 
 class Page extends React.Component {
@@ -92,6 +93,10 @@ class Page extends React.Component {
     return this.state.vault.auths();
   }
 
+  getSecrets = (mountPoint) => {
+    return this.state.vault.read(mountPoint);
+  }
+
   render = () => {
     let visibleElement = null;
 
@@ -119,10 +124,14 @@ class Page extends React.Component {
       );
     } else {
       visibleElement = (
-        <Mounts
-          getAuths={this.getAuths}
-          getMounts={this.getMounts}
-         />
+        <div>
+          <Mounts
+            getAuths={this.getAuths}
+            getMounts={this.getMounts}
+           />
+          <Secrets
+            getSecrets={this.getSecrets}/>
+        </div>
       );
     }
     return (
