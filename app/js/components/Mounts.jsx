@@ -34,12 +34,20 @@ class Mounts extends React.Component {
         <Tab
           label="Secret Backends"
           onActive={this.loadMounts} >
-            <textarea value={this.state.mounts}></textarea>
+            <pre>
+              <code>
+                {this.state.mounts}
+              </code>
+            </pre>
         </Tab>
         <Tab
           label="Auth Backends"
           onActive={this.loadAuths}>
-            <textarea value={this.state.auths}></textarea>
+          <pre>
+            <code>
+              {this.state.auths}
+            </code>
+          </pre>
         </Tab>
       </Tabs>
     );
