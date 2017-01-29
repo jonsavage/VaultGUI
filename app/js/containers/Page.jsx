@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import AppBarComposition from '../components/AppBarComposition';
 import Authentication from '../components/Authentication';
 import ConnectionForm from '../components/ConnectionForm';
 import Mounts from '../components/Mounts';
-import NavBar from '../components/NavBar';
 import Secrets from '../components/Secrets';
 import Unseal from '../components/Unseal';
 
@@ -136,11 +136,11 @@ class Page extends React.Component {
     }
     return (
       <div>
-        <NavBar
+        <AppBarComposition
           isConnected={this.state.isConnected}
           isAuthenticated={this.state.isAuthenticated}
           isSealed={this.state.isSealed}
-          sealHandler={this.handleSeal}
+          handleSeal={this.handleSeal}
         />
         {visibleElement}
       </div>
