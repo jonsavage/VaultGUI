@@ -28,7 +28,6 @@ class Secrets extends React.Component {
   render() {
     return (
       <div>
-        <h2>Read Secrets:</h2>
         <form onSubmit={this.handleSubmit}>
           <TextField
             floatingLabelText="Mount Point"

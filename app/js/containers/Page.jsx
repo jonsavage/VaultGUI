@@ -4,8 +4,7 @@ import ReactDOM from 'react-dom';
 import AppBarComposition from '../components/AppBarComposition';
 import Authentication from '../components/Authentication';
 import ConnectionForm from '../components/ConnectionForm';
-import Mounts from '../components/Mounts';
-import Secrets from '../components/Secrets';
+import Interact from '../components/Interact';
 import Unseal from '../components/Unseal';
 
 class Page extends React.Component {
@@ -125,11 +124,9 @@ class Page extends React.Component {
     } else {
       visibleElement = (
         <div>
-          <Mounts
+          <Interact
             getAuths={this.getAuths}
             getMounts={this.getMounts}
-           />
-          <Secrets
             getSecrets={this.getSecrets}/>
         </div>
       );
