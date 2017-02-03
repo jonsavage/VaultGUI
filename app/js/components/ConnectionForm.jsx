@@ -12,7 +12,9 @@ class ConnectionForm extends React.Component {
   };
 
   handleSubmit = (event) => {
-    this.props.onSubmit(this.state.url);
+    this.props.onSubmit(this.state.url)
+      .catch((err) => console.log(err));
+
     event.preventDefault();
   };
 

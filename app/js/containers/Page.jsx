@@ -21,15 +21,27 @@ class Page extends React.Component {
   };
 
   initVault = (url) => {
-    this.setState({isConnected: true});
-    var options = {
-      apiVersion: 'v1',
-      endpoint: url
-    };
-    var vault = require("node-vault")(options);
+    return new Promise((resolve, reject) => {
+      var options = {
+        apiVersion: 'v1',
+        endpoint: url
+      };
 
-    this.setState({vault: vault}, () => {
-      this.refreshStatus();
+      var vault = require("node-vault")(options);
+
+      vault.status()
+        .then(() => {
+          this.setState(
+            {
+              vault: vault,
+              isConnected: true
+            },
+            () => {
+              this.refreshStatus();
+              resolve();
+            });
+        })
+        .catch(() => reject("Invalid Server"));
     });
   };
 
@@ -43,12 +55,11 @@ class Page extends React.Component {
             keyCount: result.n,
             progress: result.progress,
             threshold: result.t
-        });
+          });
+    })
+    .catch((err) => {
+      console.log(err);
     });
-  };
-
-  handleConnect = (url) => {
-    this.initVault(url);
   };
 
   handleRootTokenAuthentication = (token) => {
@@ -101,7 +112,7 @@ class Page extends React.Component {
 
     if(!this.state.isConnected) {
       visibleElement = (
-        <ConnectionForm onSubmit={this.handleConnect}/>
+        <ConnectionForm onSubmit={this.initVault}/>
       );
     }
     else if(this.state.isSealed){
