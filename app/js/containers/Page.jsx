@@ -107,6 +107,10 @@ class Page extends React.Component {
     return this.state.vault.read(mountPoint);
   }
 
+  listSecrets = (path) => {
+    return this.state.vault.list(path);
+  }
+
   render = () => {
     let visibleElement = null;
 
@@ -138,7 +142,8 @@ class Page extends React.Component {
           <Interact
             getAuths={this.getAuths}
             getMounts={this.getMounts}
-            getSecrets={this.getSecrets}/>
+            getSecrets={this.getSecrets}
+            listSecrets={this.listSecrets}/>
         </div>
       );
     }
