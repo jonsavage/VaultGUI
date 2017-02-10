@@ -5,7 +5,8 @@ import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 
 import Mounts from '../components/Mounts';
-import Secrets from '../components/Secrets';
+import SecretReader from '../components/SecretReader';
+import SecretLister from '../components/SecretLister';
 
 const styles = {
   content:{
@@ -44,7 +45,10 @@ export default class Interact extends React.Component {
         visibleElement = <Mounts {...this.props} />;
         break;
       case 1:
-        visibleElement = <Secrets {...this.props} />;
+        visibleElement = <SecretReader {...this.props} />;
+        break;
+      case 2:
+        visibleElement = <SecretLister {...this.props} />;
         break;
     }
 
@@ -56,7 +60,8 @@ export default class Interact extends React.Component {
             selectedMenuItemStyle={styles.selectedMenuItem}
             value={this.state.selectedElement}>
             <MenuItem value={0}>Mounts</MenuItem>
-            <MenuItem value={1}>Secrets</MenuItem>
+            <MenuItem value={1}>Secret Reader</MenuItem>
+            <MenuItem value={2}>Secret Lister</MenuItem>
           </Menu>
         </Paper>
         <div style={styles.content}>
