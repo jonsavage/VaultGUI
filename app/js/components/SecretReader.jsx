@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-class Secrets extends React.Component {
+class SecretReader extends React.Component {
   state = {
     mountPoint: '',
     secrets: ''
@@ -13,6 +13,7 @@ class Secrets extends React.Component {
   handleChange = (event) => {
     this.setState({mountPoint: event.target.value});
   };
+
 
   handleSubmit = (event) => {
     this.props.getSecrets(this.state.mountPoint)
@@ -31,7 +32,7 @@ class Secrets extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <TextField
             floatingLabelText="Mount Point"
-            hintText="secret/"
+            hintText="secret/foo"
             value={this.state.mountPoint}
             onChange={this.handleChange}/>
           <RaisedButton
@@ -49,4 +50,4 @@ class Secrets extends React.Component {
   }
 }
 
-export default Secrets;
+export default SecretReader;
