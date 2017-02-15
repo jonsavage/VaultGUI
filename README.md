@@ -18,8 +18,11 @@ Feel free to contribute or submit issues as needed.
 2. Authentication Methods
  * Root Token
  * userpass (username and password)
- * GitHub (token)
 3. Seal/Unseal
 4. Read Secrets
 5. List Mounted Secret Backends
 6. List Mounted Auth Backends
+7. List Mounted Secrets
+8. Write Secrets
+
+This is my first JS, React and Electron App) Very open to feedback. Please tell me if I'm going about this the wrong way.
