@@ -24,5 +24,6 @@ Feel free to contribute or submit issues as needed.
 6. List Mounted Auth Backends
 7. List Mounted Secrets
 8. Write Secrets
+9. Status and Health
 
 This is my first JS, React and Electron App) Very open to feedback. Please tell me if I'm going about this the wrong way.

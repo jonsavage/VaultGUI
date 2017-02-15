@@ -144,7 +144,9 @@ class Page extends React.Component {
             getMounts={this.getMounts}
             getSecrets={this.getSecrets}
             listSecrets={this.listSecrets}
-            writeSecret={this.state.vault.write}/>
+            writeSecret={this.state.vault.write}
+            getHealth={this.state.vault.health}
+            getStatus={this.state.vault.status}/>
         </div>
       );
     }

@@ -8,6 +8,7 @@ import Mounts from '../components/Mounts';
 import SecretReader from '../components/SecretReader';
 import SecretLister from '../components/SecretLister';
 import SecretWriter from '../components/SecretWriter';
+import Status from '../components/Status';
 
 const styles = {
   content:{
@@ -54,6 +55,9 @@ export default class Interact extends React.Component {
       case 3:
         visibleElement = <SecretWriter {...this.props} />;
         break;
+      case 4:
+        visibleElement = <Status {...this.props} />;
+        break;
     }
 
     return (
@@ -67,6 +71,7 @@ export default class Interact extends React.Component {
             <MenuItem value={1}>Secret Reader</MenuItem>
             <MenuItem value={2}>Secret Lister</MenuItem>
             <MenuItem value={3}>Secret Writer</MenuItem>
+            <MenuItem value={4}>Status</MenuItem>
           </Menu>
         </Paper>
         <div style={styles.content}>
