@@ -71,6 +71,11 @@ class Page extends React.Component {
       .then((result) => this.setVaultTokenAndGetStatus(result.auth.client_token));
   };
 
+  handleGithubAuthentication = (token) => {
+    this.state.vault.githubLogin({ token })
+      .then((result) => this.setVaultTokenAndGetStatus(result.auth.client_token));
+  };
+
   setVaultTokenAndGetStatus = (token) => {
     var vault = this.state.vault;
 
@@ -134,6 +139,7 @@ class Page extends React.Component {
         <Authentication
           rootTokenHandler={this.handleRootTokenAuthentication}
           userPassAutheticationHandler={this.handleUserPassAuthentication}
+          githubAuthenticationHandler={this.handleGithubAuthentication}
         />
       );
     } else {
