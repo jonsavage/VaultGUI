@@ -152,7 +152,8 @@ class Page extends React.Component {
             listSecrets={this.listSecrets}
             writeSecret={this.state.vault.write}
             getHealth={this.state.vault.health}
-            getStatus={this.state.vault.status}/>
+            getStatus={this.state.vault.status}
+            getPolicies={this.state.vault.policies}/>
         </div>
       );
     }
