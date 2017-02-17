@@ -76,6 +76,10 @@ class Page extends React.Component {
       .then((result) => this.setVaultTokenAndGetStatus(result.auth.client_token));
   };
 
+  handleSignOut = () => {
+    this.setVaultTokenAndGetStatus('');
+  };
+
   setVaultTokenAndGetStatus = (token) => {
     var vault = this.state.vault;
 
@@ -165,6 +169,7 @@ class Page extends React.Component {
           isAuthenticated={this.state.isAuthenticated}
           isSealed={this.state.isSealed}
           handleSeal={this.handleSeal}
+          handleSignOut={this.handleSignOut}
         />
         {visibleElement}
       </div>
