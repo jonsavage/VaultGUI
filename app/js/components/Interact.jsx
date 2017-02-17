@@ -6,10 +6,7 @@ import Paper from 'material-ui/Paper';
 
 import Mounts from '../components/Mounts';
 import Policies from '../components/Policies';
-import SecretReader from '../components/SecretReader';
-import SecretLister from '../components/SecretLister';
-import SecretDeleter from '../components/SecretDeleter';
-import SecretWriter from '../components/SecretWriter';
+import Secrets from '../components/Secrets'
 import Status from '../components/Status';
 
 const styles = {
@@ -49,21 +46,12 @@ export default class Interact extends React.Component {
         visibleElement = <Mounts {...this.props} />;
         break;
       case 1:
-        visibleElement = <SecretReader {...this.props} />;
+        visibleElement = <Secrets {...this.props} />;
         break;
       case 2:
-        visibleElement = <SecretLister {...this.props} />;
-        break;
-      case 3:
-        visibleElement = <SecretWriter {...this.props} />;
-        break;
-      case 4:
-        visibleElement = <SecretDeleter {...this.props} />;
-        break;
-      case 5:
         visibleElement = <Status {...this.props} />;
         break;
-      case 6:
+      case 3:
         visibleElement = <Policies {...this.props} />;
         break;
     }
@@ -76,12 +64,9 @@ export default class Interact extends React.Component {
             selectedMenuItemStyle={styles.selectedMenuItem}
             value={this.state.selectedElement}>
             <MenuItem value={0}>Mounts</MenuItem>
-            <MenuItem value={1}>Secret Reader</MenuItem>
-            <MenuItem value={2}>Secret Lister</MenuItem>
-            <MenuItem value={3}>Secret Writer</MenuItem>
-            <MenuItem value={4}>Secret Deleter</MenuItem>
-            <MenuItem value={5}>Status</MenuItem>
-            <MenuItem value={6}>Policies</MenuItem>
+            <MenuItem value={1}>Secrets</MenuItem>
+            <MenuItem value={2}>Status</MenuItem>
+            <MenuItem value={3}>Policies</MenuItem>
           </Menu>
         </Paper>
         <div style={styles.content}>
