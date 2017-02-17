@@ -17,7 +17,7 @@ class Page extends React.Component {
     isSealed: null,
     keyCount: null,
     progress: null,
-    threshold: null,
+    threshold: null
   };
 
   initVault = (url) => {
@@ -42,6 +42,23 @@ class Page extends React.Component {
             });
         })
         .catch(() => reject("Invalid Server"));
+    });
+  };
+
+  disconnectFromVault = () => {
+    this.setState(
+      {
+        vault: null,
+        options: null,
+        isConnected: false,
+        isAuthenticated: false,
+        isSealed: null,
+        keyCount: null,
+        progress: null,
+        threshold: null
+      },
+      () => {
+        this.refreshStatus();
     });
   };
 
@@ -170,6 +187,7 @@ class Page extends React.Component {
           isSealed={this.state.isSealed}
           handleSeal={this.handleSeal}
           handleSignOut={this.handleSignOut}
+          handleDisconnect={this.disconnectFromVault}
         />
         {visibleElement}
       </div>
