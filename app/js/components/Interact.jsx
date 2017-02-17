@@ -8,6 +8,7 @@ import Mounts from '../components/Mounts';
 import Policies from '../components/Policies';
 import SecretReader from '../components/SecretReader';
 import SecretLister from '../components/SecretLister';
+import SecretDeleter from '../components/SecretDeleter';
 import SecretWriter from '../components/SecretWriter';
 import Status from '../components/Status';
 
@@ -57,9 +58,12 @@ export default class Interact extends React.Component {
         visibleElement = <SecretWriter {...this.props} />;
         break;
       case 4:
-        visibleElement = <Status {...this.props} />;
+        visibleElement = <SecretDeleter {...this.props} />;
         break;
       case 5:
+        visibleElement = <Status {...this.props} />;
+        break;
+      case 6:
         visibleElement = <Policies {...this.props} />;
         break;
     }
@@ -75,8 +79,9 @@ export default class Interact extends React.Component {
             <MenuItem value={1}>Secret Reader</MenuItem>
             <MenuItem value={2}>Secret Lister</MenuItem>
             <MenuItem value={3}>Secret Writer</MenuItem>
-            <MenuItem value={4}>Status</MenuItem>
-            <MenuItem value={5}>Policies</MenuItem>
+            <MenuItem value={4}>Secret Deleter</MenuItem>
+            <MenuItem value={5}>Status</MenuItem>
+            <MenuItem value={6}>Policies</MenuItem>
           </Menu>
         </Paper>
         <div style={styles.content}>
