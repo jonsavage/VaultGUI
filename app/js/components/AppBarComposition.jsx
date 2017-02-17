@@ -29,7 +29,12 @@ const Status = (props) => (
       Connection
     </Chip>
 
-    <Chip style={styles.chip}>
+    <Chip
+      style={styles.chip}
+      onRequestDelete={
+        props.isAuthenticated
+          ? () => props.handleSignOut()
+          : null}>
       <Avatar icon={<BooleanStatus value={props.isAuthenticated}/>} />
       Authentication
     </Chip>
