@@ -151,6 +151,7 @@ class Page extends React.Component {
             getSecrets={this.getSecrets}
             listSecrets={this.listSecrets}
             writeSecret={this.state.vault.write}
+            deleteSecret={this.state.vault.delete}
             getHealth={this.state.vault.health}
             getStatus={this.state.vault.status}
             getPolicies={this.state.vault.policies}/>
