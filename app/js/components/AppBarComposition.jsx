@@ -24,11 +24,15 @@ function BooleanStatus(props) {
 
 const Status = (props) => (
   <div style={styles.wrapper}>
-    <Chip style={styles.chip}>
+    <Chip
+      style={styles.chip}
+      onRequestDelete={
+        props.isConnected
+          ? () => props.handleDisconnect()
+          : null}>
       <Avatar icon={<BooleanStatus value={props.isConnected}/>} />
       Connection
     </Chip>
-
     <Chip
       style={styles.chip}
       onRequestDelete={
