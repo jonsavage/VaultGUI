@@ -1,17 +1,16 @@
 # VaultGUI [![Build Status](https://travis-ci.org/jonsavage/VaultGUI.svg?branch=master)](https://travis-ci.org/jonsavage/VaultGUI)
 
-A cross-platform desktop app for interacting with a Hashicorp Vault server (check it out here: https://github.com/hashicorp/vault.)
+A cross-platform desktop app for interacting with a Hashicorp Vault server (check out Vault here: https://github.com/hashicorp/vault.)
 
-Node-Vault is a super useful package that handles all interaction with the Vauth Server REST API: https://github.com/kr1sp1n/node-vault
+![read_secrets](/readme_images/read_secrets.png?raw=true "Read Secrets")
 
 Build Instructions:
-Uses: node `7.4.0`
 
-After cloning:
-run `npm install`
-run `npm run start` 
+Ensure node `>=7.4.0` is installed.
 
-Feel free to contribute or submit issues as needed.
+After cloning, run:`npm install` then `npm run start` 
+
+Feel free to submit issues, feature requests and contributions as needed.
 
 ## Features Completed
 1. Server Connection
@@ -29,4 +28,5 @@ Feel free to contribute or submit issues as needed.
 10. Status and Health
 11. List Policies 
 
-This is my first JS, React and Electron App. Very open to feedback. Please tell me if I'm going about this the wrong way.
+Major props goes out to node-vault, which is the main apparatus for talking to the server
+https://github.com/kr1sp1n/node-vault
