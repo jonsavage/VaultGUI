@@ -3,9 +3,8 @@ import ReactDOM from 'react-dom';
 
 import {Tabs, Tab} from 'material-ui/Tabs';
 
-import SecretLister from '../components/SecretLister';
-import SecretReader from '../components/SecretReader';
 import SecretDeleter from '../components/SecretDeleter';
+import SecretsTree from '../components/SecretsTree';
 import SecretWriter from '../components/SecretWriter';
 
 class Secrets extends React.Component {
@@ -14,11 +13,7 @@ class Secrets extends React.Component {
       <Tabs>
         <Tab
           label="List">
-            <SecretLister {...this.props}/>
-        </Tab>
-        <Tab
-          label="Read">
-            <SecretReader {...this.props}/>
+            <SecretsTree {...this.props}/>
         </Tab>
         <Tab
           label="Write">
