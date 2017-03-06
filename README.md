@@ -1,6 +1,6 @@
 # VaultGUI [![Build Status](https://travis-ci.org/jonsavage/VaultGUI.svg?branch=master)](https://travis-ci.org/jonsavage/VaultGUI)
 
-A cross-platform desktop app for interacting with a Hashicorp Vault server (check out Vault here: https://github.com/hashicorp/vault.)
+A cross-platform desktop app for interacting with a Hashicorp Vault server (check out Vault here: https://github.com/hashicorp/vault)
 
 ![read_secrets](/readme_images/read_secrets.png?raw=true "Read Secrets")
 
