@@ -7,6 +7,7 @@ import Paper from 'material-ui/Paper';
 import Mounts from '../components/Mounts';
 import Policies from '../components/Policies';
 import Secrets from '../components/Secrets'
+import SecretsTree from '../components/SecretsTree'
 import Status from '../components/Status';
 
 const styles = {
