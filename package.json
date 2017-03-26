@@ -10,9 +10,9 @@
     "start": "babel app/js -d app/lib && electron app.js",
     "test": "gulp",
     "build": "babel app/js -d app/lib",
-    "package:mac":"electron-packager . --overwrite --platform=darwin --arch=x64  --prune=true --out=release_builds",
-    "package:windows":"electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --out=release_builds --version-string.FileDescription=CE --version-string.ProductName=\"VaultGUI\"",
-    "package:linux" : "electron-packager . --overwrite --platform=linux --arch=x64 --prune=true --out=release_builds"
+    "package:mac":"electron-packager . --overwrite --platform=darwin --arch=x64  --prune=true --out=dist",
+    "package:windows":"electron-packager . --overwrite --asar=true --platform=win32 --arch=ia32 --out=dist --version-string.FileDescription=CE --version-string.ProductName=\"VaultGUI\"",
+    "package:linux" : "electron-packager . --overwrite --platform=linux --arch=x64 --prune=true --out=dist"
   },
 
   "repository": {
