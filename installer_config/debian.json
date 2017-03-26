@@ -1,0 +1,17 @@
+{
+  "arch": "amd64",
+  "bin": "VaultGUI",
+  "categories": [
+    "Utility"
+  ],
+  "description": "A cross-platform desktop application for interacting with a Hashicorp Vault.",
+  "dest": "dist/installers/",
+  "homepage": "https://github.com/jonsavage/VaultGUI",
+  "icon": "assets/debian/icons/icon_512x512.png",
+  "maintainer": "Jon Savage <jon5@vt.edu>",
+  "name": "vaultgui",
+  "productName": "VaultGUI",
+  "section": "utils",
+  "src": "dist/VaultGUI-linux-x64/",
+  "version": "0.1.0"
+}
