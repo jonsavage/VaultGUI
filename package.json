@@ -26,6 +26,7 @@
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-1": "^6.16.0",
     "bootstrap": "~>3.3.7",
+    "electron-installer-debian": "^0.5.1",
     "electron-packager": "^8.5.2",
     "electron-prebuilt": "^1.4.13",
     "gulp": "^3.9.1",
