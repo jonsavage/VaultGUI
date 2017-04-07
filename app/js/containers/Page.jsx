@@ -137,6 +137,14 @@ class Page extends React.Component {
     return this.state.vault.list(path);
   }
 
+  mountSecretBackend = (path) => {
+    return this.state.vault.mount({ mount_point: path, type: 'generic'});
+  }
+
+  unmountSecretBackend = (path) => {
+    return this.state.vault.unmount({ mount_point: path });
+  }
+
   render = () => {
     let visibleElement = null;
 
@@ -171,11 +179,14 @@ class Page extends React.Component {
             getMounts={this.getMounts}
             getSecrets={this.getSecrets}
             listSecrets={this.listSecrets}
+            mountSecretBackend={this.mountSecretBackend}
             writeSecret={this.state.vault.write}
             deleteSecret={this.state.vault.delete}
             getHealth={this.state.vault.health}
             getStatus={this.state.vault.status}
-            getPolicies={this.state.vault.policies}/>
+            getPolicies={this.state.vault.policies}
+            unmountSecretBackend={this.unmountSecretBackend}
+          />
         </div>
       );
     }

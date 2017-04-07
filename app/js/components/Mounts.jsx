@@ -3,15 +3,11 @@ import ReactDOM from 'react-dom';
 
 import {Tabs, Tab} from 'material-ui/Tabs';
 
-class Mounts extends React.Component {
+import SecretBackends from './SecretBackends'
 
-  componentWillMount() {
-    this.loadMounts();
-  }
-
+export default class Mounts extends React.Component {
   state = {
-    auths: '',
-    mounts: ''
+    auths: ''
   }
 
   loadAuths = () => {
@@ -21,24 +17,12 @@ class Mounts extends React.Component {
       });
   };
 
-  loadMounts = () => {
-    this.props.getMounts()
-      .then((result) => {
-        this.setState({mounts: JSON.stringify(result, null, 4)});
-      });
-  };
-
   render() {
     return (
       <Tabs>
         <Tab
-          label="Secret Backends"
-          onActive={this.loadMounts} >
-            <pre>
-              <code>
-                {this.state.mounts}
-              </code>
-            </pre>
+          label="Secret Backends">
+          <SecretBackends {...this.props}/>
         </Tab>
         <Tab
           label="Auth Backends"
@@ -53,5 +37,3 @@ class Mounts extends React.Component {
     );
   }
 }
-
-export default Mounts;
