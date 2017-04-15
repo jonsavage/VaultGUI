@@ -7,7 +7,7 @@ import SecretDeleter from '../components/SecretDeleter';
 import SecretsTree from '../components/SecretsTree';
 import SecretWriter from '../components/SecretWriter';
 
-class Secrets extends React.Component {
+export default class Secrets extends React.Component {
   render() {
     return (
       <Tabs>
@@ -27,5 +27,3 @@ class Secrets extends React.Component {
     );
   }
 }
-
-export default Secrets;

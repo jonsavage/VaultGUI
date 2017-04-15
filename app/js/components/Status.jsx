@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import {Tabs, Tab} from 'material-ui/Tabs';
 
-class Status extends React.Component {
+export default class Status extends React.Component {
 
   componentWillMount() {
     this.loadStatus();
@@ -53,5 +53,3 @@ class Status extends React.Component {
     );
   }
 }
-
-export default Status;

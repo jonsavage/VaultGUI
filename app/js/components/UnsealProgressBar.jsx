@@ -1,7 +1,7 @@
 import React from 'react';
 import LinearProgress from 'material-ui/LinearProgress';
 
-class UnsealProgressBar extends React.Component {
+export default class UnsealProgressBar extends React.Component {
 
   state = {
     completed: 0,
@@ -31,5 +31,3 @@ class UnsealProgressBar extends React.Component {
     );
   }
 }
-
-export default UnsealProgressBar;

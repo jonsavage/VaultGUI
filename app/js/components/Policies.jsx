@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-class Policies extends React.Component {
+export default class Policies extends React.Component {
   componentWillMount() {
     this.loadPolicies();
   }
@@ -29,5 +29,3 @@ class Policies extends React.Component {
     );
   }
 }
-
-export default Policies;

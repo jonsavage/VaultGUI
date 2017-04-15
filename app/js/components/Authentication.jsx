@@ -7,7 +7,7 @@ import RootTokenAuthentication from './RootTokenAuthentication';
 import UserPassAuthentication from './UserPassAuthentication';
 import GithubAuthentication from './GithubAuthentication';
 
-class Authentication extends React.Component {
+export default class Authentication extends React.Component {
 
   render() {
     return (
@@ -25,5 +25,3 @@ class Authentication extends React.Component {
     );
   }
 }
-
-export default Authentication;

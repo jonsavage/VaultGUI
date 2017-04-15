@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-class SecretDeleter extends React.Component {
+export default class SecretDeleter extends React.Component {
   state = {
     path: '',
     resultMessage: ''
@@ -48,5 +48,3 @@ class SecretDeleter extends React.Component {
     );
   }
 }
-
-export default SecretDeleter;
