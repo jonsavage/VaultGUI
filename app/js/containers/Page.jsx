@@ -10,7 +10,7 @@ import Unseal from '../components/Unseal';
 class Page extends React.Component {
 
   state = {
-    vault: null,
+    vaultClient: null,
     options: null,
     isConnected: false,
     isAuthenticated: false,
@@ -20,19 +20,19 @@ class Page extends React.Component {
     threshold: null
   };
 
-  initVault = (url) => {
+  initVaultClient = (url) => {
     var options = {
       apiVersion: 'v1',
       endpoint: url
     };
 
-    var vault = require("node-vault")(options);
+    var vaultClient = require("node-vault")(options);
 
-    return vault.status()
+    return vaultClient.status()
       .then(() => {
         this.setState(
           {
-            vault: vault,
+            vaultClient: vaultClient,
             isConnected: true
           },
           () => {
@@ -46,7 +46,7 @@ class Page extends React.Component {
   disconnectFromVault = () => {
     this.setState(
       {
-        vault: null,
+        vaultClient: null,
         options: null,
         isConnected: false,
         isAuthenticated: false,
@@ -61,12 +61,12 @@ class Page extends React.Component {
   };
 
   refreshStatus = () => {
-    this.state.vault.status()
+    this.state.vaultClient.status()
       .then((result) => {
         this.setState(
           {
             isSealed: result.sealed,
-            isAuthenticated: this.state.vault.token ? true : false,
+            isAuthenticated: this.state.vaultClient.token ? true : false,
             keyCount: result.n,
             progress: result.progress,
             threshold: result.t
@@ -78,20 +78,20 @@ class Page extends React.Component {
   };
 
   handleRootTokenAuthentication = (token) => {
-    var vault = this.state.vault;
-    vault.token = token;
+    var vaultClient = this.state.vaultClient;
+    vaultClient.token = token;
 
-    return vault.tokenLookupSelf()
+    return vaultClient.tokenLookupSelf()
       .then(() => this.setVaultTokenAndGetStatus(token));
   };
 
   handleUserPassAuthentication = (username, password) => {
-    this.state.vault.userpassLogin({ username, password })
+    this.state.vaultClient.userpassLogin({ username, password })
       .then((result) => this.setVaultTokenAndGetStatus(result.auth.client_token));
   };
 
   handleGithubAuthentication = (token) => {
-    this.state.vault.githubLogin({ token })
+    this.state.vaultClient.githubLogin({ token })
       .then((result) => this.setVaultTokenAndGetStatus(result.auth.client_token));
   };
 
@@ -100,50 +100,50 @@ class Page extends React.Component {
   };
 
   setVaultTokenAndGetStatus = (token) => {
-    var vault = this.state.vault;
-    vault.token = token;
+    var vaultClient = this.state.vaultClient;
+    vaultClient.token = token;
 
-    this.setState({vault: vault}, () => {
+    this.setState({vaultClient: vaultClient}, () => {
       this.refreshStatus();
     });
   };
 
   handleSeal = () => {
-    this.state.vault.seal()
+    this.state.vaultClient.seal()
       .then( () =>
         this.refreshStatus()
       );
   };
 
   handleUnseal = (key) => {
-    this.state.vault.unseal({key: key})
+    this.state.vaultClient.unseal({key: key})
       .then( () =>
         this.refreshStatus()
       );
   };
 
   getMounts = () => {
-    return this.state.vault.mounts();
+    return this.state.vaultClient.mounts();
   }
 
   getAuths = () => {
-    return this.state.vault.auths();
+    return this.state.vaultClient.auths();
   }
 
   getSecrets = (mountPoint) => {
-    return this.state.vault.read(mountPoint);
+    return this.state.vaultClient.read(mountPoint);
   }
 
   listSecrets = (path) => {
-    return this.state.vault.list(path);
+    return this.state.vaultClient.list(path);
   }
 
   mountSecretBackend = (path) => {
-    return this.state.vault.mount({ mount_point: path, type: 'generic'});
+    return this.state.vaultClient.mount({ mount_point: path, type: 'generic'});
   }
 
   unmountSecretBackend = (path) => {
-    return this.state.vault.unmount({ mount_point: path });
+    return this.state.vaultClient.unmount({ mount_point: path });
   }
 
   render = () => {
@@ -151,7 +151,7 @@ class Page extends React.Component {
 
     if(!this.state.isConnected) {
       visibleElement = (
-        <ConnectionForm onSubmit={this.initVault}/>
+        <ConnectionForm onSubmit={this.initVaultClient}/>
       );
     }
     else if(this.state.isSealed){
@@ -181,12 +181,12 @@ class Page extends React.Component {
             getSecrets={this.getSecrets}
             listSecrets={this.listSecrets}
             mountSecretBackend={this.mountSecretBackend}
-            writeSecret={this.state.vault.write}
-            deleteSecret={this.state.vault.delete}
-            getHealth={this.state.vault.health}
-            getStatus={this.state.vault.status}
-            getPolicies={this.state.vault.policies}
-            tokenLookupSelf={this.state.vault.tokenLookupSelf}
+            writeSecret={this.state.vaultClient.write}
+            deleteSecret={this.state.vaultClient.delete}
+            getHealth={this.state.vaultClient.health}
+            getStatus={this.state.vaultClient.status}
+            getPolicies={this.state.vaultClient.policies}
+            tokenLookupSelf={this.state.vaultClient.tokenLookupSelf}
             unmountSecretBackend={this.unmountSecretBackend}
           />
         </div>
