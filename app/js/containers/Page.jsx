@@ -185,6 +185,7 @@ class Page extends React.Component {
             getHealth={this.state.vault.health}
             getStatus={this.state.vault.status}
             getPolicies={this.state.vault.policies}
+            tokenLookupSelf={this.state.vault.tokenLookupSelf}
             unmountSecretBackend={this.unmountSecretBackend}
           />
         </div>
