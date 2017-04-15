@@ -83,10 +83,8 @@ class Page extends React.Component {
     var vault = this.state.vault;
     vault.token = token;
 
-    vault.tokenLookupSelf()
-      .then((result) => console.log(result))
-      .then(() => this.setVaultTokenAndGetStatus(token))
-      .catch((err) => console.log(err));
+    return vault.tokenLookupSelf()
+      .then(() => this.setVaultTokenAndGetStatus(token));
   };
 
   handleUserPassAuthentication = (username, password) => {
