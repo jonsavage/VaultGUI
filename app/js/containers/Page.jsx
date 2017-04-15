@@ -80,7 +80,13 @@ class Page extends React.Component {
   };
 
   handleRootTokenAuthentication = (token) => {
-    this.setVaultTokenAndGetStatus(token);
+    var vault = this.state.vault;
+    vault.token = token;
+
+    vault.tokenLookupSelf()
+      .then((result) => console.log(result))
+      .then(() => this.setVaultTokenAndGetStatus(token))
+      .catch((err) => console.log(err));
   };
 
   handleUserPassAuthentication = (username, password) => {
@@ -99,7 +105,6 @@ class Page extends React.Component {
 
   setVaultTokenAndGetStatus = (token) => {
     var vault = this.state.vault;
-
     vault.token = token;
 
     this.setState({vault: vault}, () => {
