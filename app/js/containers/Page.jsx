@@ -21,28 +21,26 @@ class Page extends React.Component {
   };
 
   initVault = (url) => {
-    return new Promise((resolve, reject) => {
-      var options = {
-        apiVersion: 'v1',
-        endpoint: url
-      };
+    var options = {
+      apiVersion: 'v1',
+      endpoint: url
+    };
 
-      var vault = require("node-vault")(options);
+    var vault = require("node-vault")(options);
 
-      vault.status()
-        .then(() => {
-          this.setState(
-            {
-              vault: vault,
-              isConnected: true
-            },
-            () => {
-              this.refreshStatus();
-              resolve();
-            });
-        })
-        .catch(() => reject("Invalid Server"));
-    });
+    return vault.status()
+      .then(() => {
+        this.setState(
+          {
+            vault: vault,
+            isConnected: true
+          },
+          () => {
+            this.refreshStatus();
+            resolve();
+          });
+      })
+      .catch(() => reject("Invalid Server"));
   };
 
   disconnectFromVault = () => {
