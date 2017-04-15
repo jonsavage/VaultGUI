@@ -7,7 +7,7 @@ import ConnectionForm from '../components/ConnectionForm';
 import Interact from '../components/Interact';
 import Unseal from '../components/Unseal';
 
-class Page extends React.Component {
+export default class Page extends React.Component {
 
   state = {
     vaultClient: null,
@@ -207,5 +207,3 @@ class Page extends React.Component {
     );
   }
 }
-
-export default Page

@@ -5,7 +5,7 @@ import Snackbar from 'material-ui/Snackbar';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-class ConnectionForm extends React.Component {
+export default class ConnectionForm extends React.Component {
   state = {
     url: '',
     snackbar: {
@@ -64,5 +64,3 @@ class ConnectionForm extends React.Component {
     );
   }
 }
-
-export default ConnectionForm;

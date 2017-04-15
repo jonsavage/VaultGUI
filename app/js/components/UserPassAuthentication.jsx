@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-class UserPassAuthentication extends React.Component {
+export default class UserPassAuthentication extends React.Component {
   state = {
     username: '',
     password: ''
@@ -43,5 +43,3 @@ class UserPassAuthentication extends React.Component {
     );
   }
 }
-
-export default UserPassAuthentication;

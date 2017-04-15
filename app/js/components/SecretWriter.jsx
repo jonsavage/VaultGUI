@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-class SecretWriter extends React.Component {
+export default class SecretWriter extends React.Component {
   state = {
     path: '',
     data: '',
@@ -58,5 +58,3 @@ class SecretWriter extends React.Component {
     );
   }
 }
-
-export default SecretWriter;

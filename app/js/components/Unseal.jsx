@@ -5,7 +5,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import UnsealProgressBar from './UnsealProgressBar';
 
-class Unseal extends React.Component {
+export default class Unseal extends React.Component {
   state = {key: ''};
 
   handleChange = (event) => {
@@ -42,5 +42,3 @@ class Unseal extends React.Component {
     );
   }
 }
-
-export default Unseal;

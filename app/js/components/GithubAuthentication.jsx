@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
-class GithubAuthentication extends React.Component {
+export default class GithubAuthentication extends React.Component {
   state = {token: ''};
 
   handleChange = (event) => {
@@ -32,5 +32,3 @@ class GithubAuthentication extends React.Component {
     );
   }
 }
-
-export default GithubAuthentication;

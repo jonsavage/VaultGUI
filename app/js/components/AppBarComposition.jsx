@@ -56,7 +56,7 @@ const Status = (props) => (
   </div>
 );
 
-class AppBarComposition extends Component {
+export default class AppBarComposition extends Component {
   render() {
     return (
       <div>
@@ -68,5 +68,3 @@ class AppBarComposition extends Component {
     );
   }
 }
-
-export default AppBarComposition;
