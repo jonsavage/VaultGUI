@@ -4,6 +4,7 @@ import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 
+import LookupSelf from '../components/LookupSelf';
 import Mounts from '../components/Mounts';
 import Policies from '../components/Policies';
 import Secrets from '../components/Secrets'
@@ -55,6 +56,9 @@ export default class Interact extends React.Component {
       case 3:
         visibleElement = <Policies {...this.props} />;
         break;
+      case 4:
+        visibleElement = <LookupSelf {...this.props} />;
+        break;
     }
 
     return (
@@ -68,6 +72,7 @@ export default class Interact extends React.Component {
             <MenuItem value={1}>Secrets</MenuItem>
             <MenuItem value={2}>Status</MenuItem>
             <MenuItem value={3}>Policies</MenuItem>
+            <MenuItem value={4}>Token Status</MenuItem>
           </Menu>
         </Paper>
         <div style={styles.content}>
