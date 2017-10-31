@@ -55,3 +55,4 @@ Feel free to submit issues, feature requests and contributions as needed.
 
 Major props goes out to node-vault, which is the REST Client used to communicate with the Vault server.
 https://github.com/kr1sp1n/node-vault
+test
