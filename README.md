@@ -2,6 +2,7 @@
 
 A cross-platform desktop app for interacting with a Hashicorp Vault server (check out Vault here: https://github.com/hashicorp/vault)
 
+
 ![read_secrets](/readme_images/read_secrets.png?raw=true "Read Secrets")
 
 ## Install Instructions:
