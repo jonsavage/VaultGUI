@@ -25,9 +25,14 @@ npm run package:linux
 ```
 After running you will find your executable in the `dist` directory.
 
-## Build Instructions:
+
+something 
+
+
+### Build Instructions:
 
 Ensure node `>=7.4.0` is installed.
+
 
 After cloning, run:
 ```
